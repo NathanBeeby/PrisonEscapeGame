@@ -10,10 +10,10 @@ private:
 	sf::CircleShape PlayerIcon;
 	sf::RectangleShape ArmourAddition, daynight;
 	sf::Event event;
-	sf::Font font, HUDFont, HUDFont2, RoutineFont;
+	sf::Font font;
 	sf::Text SkillsText, strengthText, staminaText, armourText, charismaText, knowledgeText, playerMissions, MissionsHeader, InventoryText, CraftText, moneyText, HealthText, LevelText, LevelString, XPText, TimerText, dayText, dateText, RoutineDialogue, submitText;
 	sf::Texture playerTexture, halfHealthPlayer, lowHealthPlayer, poundTexture, Skills, Inventory, Missions, characterTexture;
-
+	bool mousePress;
 
 	std::string prisonerFile, moneyString, lvlString;
 	std::string StrengthString, StaminaString, ArmourString, CharismaString, KnowledgeString;
@@ -56,7 +56,8 @@ public:
 	void drawCraft(sf::View &view, sf::RenderTarget& target);
 	void drawGUI(sf::View &view, sf::RenderTarget& target);
 	void Times(sf::View &view, sf::RenderTarget& target);
-	//void MouseInput(sf::RenderTarget& target);
+	void MouseInput(sf::RenderWindow &window);
+	void craftingMouseInput(sf::RenderWindow &window);
 	void skillsOpening();
 	void missionsOpening();
 	void inventoryOpening();

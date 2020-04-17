@@ -5,6 +5,7 @@ void prisonerDialogue::initVariables()
 {
 	// Boolean Variables
 	this->dialogueCheck = false;
+	this->mousePress = false;
 	//Integer Variables
 	this->prisonItemIndex = 0;
 	this->offset = 12;
@@ -95,7 +96,7 @@ void prisonerDialogue::initText()
 
 void prisonerDialogue::initFont()
 {
-	if (!this->font.loadFromFile("../assets/text_assets/FontFile.ttf"))
+	if (!this->font.loadFromFile("../assets/text_assets/Font.ttf"))
 	{
 		// error...
 		std::cout << "Error loading file" << std::endl;
@@ -283,7 +284,7 @@ void prisonerDialogue::Mission(sf::View &view, sf::RenderTarget& target, GUI &gu
 	target.draw(declineButton);
 }
 
-void prisonerDialogue::dialogueHandler(sf::View &view, sf::RenderTarget& target, GUI &gui) {
+void prisonerDialogue::dialogueHandler(sf::View &view, sf::RenderTarget &target, GUI &gui) {
 	if (prisonerDState == prisonerDialogueMenu) {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 			Up();
@@ -294,46 +295,13 @@ void prisonerDialogue::dialogueHandler(sf::View &view, sf::RenderTarget& target,
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
 			switch (GetPressedItem()) {
 			case 0: std::cout << "Talk" << std::endl;
-				gui.prisonerRep += 2;
-				prisonerDState = prisonerTalk; // setting the state to prisoner talk
-				talkInt = rand() % 7;
-				std::cout << "prisonRep: " << gui.prisonerRep << std::endl;
-				gui.charIncrement += 1;
+				this->talkPressed(gui);
 				break;
 			case 1: std::cout << "Trade" << std::endl;
-				if (gui.prisonerRep > 30) {
-					gui.guardRep -= 2;
-					gui.prisonerRep += 5;
-					prisonerDState = prisonerTrade;// setting the state to prisoner trade
-				}
-				else {
-					std::cout << "You need at least 20 prisoner rep to do this" << std::endl;
-					sf::Text repText;
-					repText.setString("You need a higher prisoner reputation");
-					repText.setFont(font);
-					repText.setCharacterSize(40);
-					repText.setFillColor(sf::Color(255, 0, 0));
-					repText.setPosition(DialogueBox.getPosition().x + 80, DialogueBox.getPosition().y - 50);
-					target.draw(repText);
-				}
+				this->tradePressed(target, gui);
 				break;
 			case 2: std::cout << "Missions" << std::endl;
-				if (gui.prisonerRep > 60) {
-					gui.prisonerRep += 7;
-					gui.guardRep -= 5;
-					prisonerDState = prisonerMissions;// setting the state to prisoner missions
-					missionsInt = rand() % 7;
-				}
-				else {
-					std::cout << "You need at least 40 prisoner rep to do this" << std::endl;
-					sf::Text repText;
-					repText.setString("You need a higher prisoner reputation");
-					repText.setFont(font);
-					repText.setCharacterSize(40);
-					repText.setFillColor(sf::Color(255, 0, 0));
-					repText.setPosition(DialogueBox.getPosition().x + 80, DialogueBox.getPosition().y - 50);
-					target.draw(repText);
-				}
+				this->missionsPressed(target, gui);
 				break;
 
 			}
@@ -343,6 +311,7 @@ void prisonerDialogue::dialogueHandler(sf::View &view, sf::RenderTarget& target,
 	if (prisonerDState == prisonerDialogueMenu) {
 		drawDialogueBox(view, target);
 		draw(view, target);
+		//mouseHandler(target); // Need to add mouse handler back for dialogue here
 		std::cout << "prison dialogue menu drawn" << std::endl;
 
 	}
@@ -367,6 +336,132 @@ void prisonerDialogue::dialogueHandler(sf::View &view, sf::RenderTarget& target,
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
 		prisonerDState = prisonerDialogueMenu;
 		dialogueCheck = false;
+	}
+}
+
+void prisonerDialogue::mouseHandler(sf::RenderWindow &window, GUI &gui)
+{
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
+	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
+		std::cout << "Clicked inside Box" << std::endl;
+
+		if (worldPos.x >= PrisonerText[0].getPosition().x && worldPos.x <= PrisonerText[0].getPosition().x + 200) {
+			if (worldPos.y >= PrisonerText[0].getPosition().y && worldPos.y <= PrisonerText[0].getPosition().y + 50) {
+				if (!mousePress) {
+					std::cout << "Talk Clicked" << std::endl;
+					this->talkPressed(gui);
+				}
+			}
+		}
+
+		if (worldPos.x >= PrisonerText[1].getPosition().x && worldPos.x <= PrisonerText[1].getPosition().x + 200) {
+			if (worldPos.y >= PrisonerText[1].getPosition().y && worldPos.y <= PrisonerText[1].getPosition().y + 50) {
+				if (!mousePress) {
+					std::cout << "Trade Clicked" << std::endl;
+					this->tradePressed(window, gui);
+				}
+			}
+		}
+
+		if (worldPos.x >= PrisonerText[2].getPosition().x && worldPos.x <= PrisonerText[2].getPosition().x + 200) {
+			if (worldPos.y >= PrisonerText[2].getPosition().y && worldPos.y <= PrisonerText[2].getPosition().y + 50) {
+				std::cout << "Missions Clicked" << std::endl;
+				this->missionsPressed(window, gui);
+			}
+		}
+		// Close Button on Talk
+		if (worldPos.x >= cancelButton.getPosition().x && worldPos.x <= cancelButton.getPosition().x + 200) {
+			if (worldPos.y >= cancelButton.getPosition().y && worldPos.y <= cancelButton.getPosition().y + 50) {
+				if (!mousePress) {
+					prisonerDState = prisonerDialogueMenu;
+					dialogueCheck = false;
+				}
+			}
+		}
+		// Accept Trade
+		if (worldPos.x >= tradeButton.getPosition().x && worldPos.x <= tradeButton.getPosition().x + 200) {
+			if (worldPos.y >= tradeButton.getPosition().y && worldPos.y <= tradeButton.getPosition().y + 50) {
+				if (!mousePress) {
+					prisonerDState = prisonerDialogueMenu;
+					dialogueCheck = false;
+				}
+			}
+		}
+		// Accept Mission
+		if (worldPos.x >= acceptButton.getPosition().x && worldPos.x <= acceptButton.getPosition().x + 200) {
+			if (worldPos.y >= acceptButton.getPosition().y && worldPos.y <= acceptButton.getPosition().y + 50) {
+				if (!mousePress) {
+					std::cout << "Mission Accepted:" << missionsInt << std::endl; // use this for trade functionality later, give positive rep to player for accepting
+					prisonerDState = prisonerDialogueMenu;
+					gui.missions.push_back(missions[missionsInt]);
+					std::cout << "Mission Accepted: " << missionsInt << std::endl;
+					dialogueCheck = false;
+				}
+			}
+		}
+		// Decine Mission
+		if (worldPos.x >= declineButton.getPosition().x && worldPos.x <= declineButton.getPosition().x + 200) {
+			if (worldPos.y >= declineButton.getPosition().y && worldPos.y <= declineButton.getPosition().y + 50) {
+				if (!mousePress) {
+					std::cout << "Mission Declined" << std::endl; // use this for trade functionality later,give negative rep to player for declining
+					prisonerDState = prisonerDialogueMenu;
+					dialogueCheck = false;
+				}
+			}
+		}
+	}
+	else {
+		mousePress = false;
+	}
+}
+
+void prisonerDialogue::talkPressed(GUI &gui)
+{
+	gui.prisonerRep += 2;
+	prisonerDState = prisonerTalk; // setting the state to prisoner talk
+	talkInt = rand() % 7;
+	std::cout << "prisonRep: " << gui.prisonerRep << std::endl;
+	gui.charIncrement += 1;
+}
+
+void prisonerDialogue::tradePressed(sf::RenderTarget &target, GUI &gui)
+{
+	if (gui.prisonerRep > 30) {
+		gui.guardRep -= 2;
+		gui.prisonerRep += 5;
+		prisonerDState = prisonerTrade;// setting the state to prisoner trade
+	}
+	else {
+		std::cout << "You need at least 20 prisoner rep to do this" << std::endl;
+		sf::Text repText;
+		repText.setString("You need a higher prisoner reputation");
+		repText.setFont(font);
+		repText.setCharacterSize(40);
+		repText.setFillColor(sf::Color(255, 0, 0));
+		repText.setPosition(DialogueBox.getPosition().x + 80, DialogueBox.getPosition().y - 50);
+		target.draw(repText);
+	}
+}
+
+void prisonerDialogue::missionsPressed(sf::RenderTarget &target, GUI &gui)
+{
+	if (gui.prisonerRep > 60) {
+		gui.prisonerRep += 7;
+		gui.guardRep -= 5;
+		prisonerDState = prisonerMissions;// setting the state to prisoner missions
+		missionsInt = rand() % 7;
+	}
+	else {
+		std::cout << "You need at least 40 prisoner rep to do this" << std::endl;
+		sf::Text repText;
+		repText.setString("You need a higher prisoner reputation");
+		repText.setFont(font);
+		repText.setCharacterSize(40);
+		repText.setFillColor(sf::Color(255, 0, 0));
+		repText.setPosition(DialogueBox.getPosition().x + 80, DialogueBox.getPosition().y - 50);
+		target.draw(repText);
 	}
 }
 

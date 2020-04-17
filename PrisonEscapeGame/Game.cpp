@@ -14,7 +14,7 @@ void Game::initVariables()
 
 						   // Position of screen center
 	this->pos = sf::Vector2f(this->ScreenSize.x / 2, this->ScreenSize.y / 2);
-
+	this->sfx.playMenuMusic();
 	// Time Variables
 	this->deltaTime = sf::Time::Zero;
 }
@@ -46,7 +46,13 @@ Game::Game()
 
 Game::~Game()
 {
-
+	delete this->window;
+	delete &view;
+	delete &player;
+	delete &guard;
+	delete &prisoner;
+	delete &nurse;
+	delete &warden;
 }
 #pragma endregion
 
@@ -392,9 +398,8 @@ void Game::updatePollEvents(sf::Time deltaTime)
 			this->updateGameState(this->ev.key.code);
 			break;
 		case sf::Event::MouseButtonPressed: // case for mouse used
-			if (GameState == PrisonGame) {
-				this->updateMouseInput();
-			}
+			break;
+		case sf::Event::MouseButtonReleased:
 			break;
 		case sf::Event::Closed:
 			exit(1); // exiting the program if the close button is pressed
@@ -409,7 +414,9 @@ void Game::keyHandler(sf::Keyboard::Key key)
 		gui.skillsOpening();
 		std::cout << "S pressed" << std::endl;
 	}
-
+	if (key == sf::Keyboard::L) {
+		this->player.addStrength(1);
+	}
 	else if (key == sf::Keyboard::M) { //missions
 		gui.missionsOpening();
 		std::cout << "M pressed" << std::endl;
@@ -438,42 +445,6 @@ void Game::keyHandler(sf::Keyboard::Key key)
 	//	this->view.zoom(-1);
 	//	std::cout << "Z pressed" << std::endl;
 	//}
-}
-
-void Game::updateMouseInput()
-{
-	sf::Vector2i mousePos = sf::Mouse::getPosition(*this->window); // getting the position of the mouse relative to the window
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
-		if (mousePos.y >= gui.box.getPosition().y && mousePos.y <= gui.box.getPosition().y + gui.box.getSize().y) { // if the y position is between the HUD button
-			if (mousePos.x >= gui.box.getPosition().x && mousePos.x <= gui.box.getPosition().x + gui.box.getSize().x) { // if the x position is on the first HUD button
-																														//Box 1
-				std::cout << "Missions" << std::endl;
-				gui.missionsOpening();
-			}
-
-			if (mousePos.x >= gui.box1.getPosition().x && mousePos.x <= gui.box1.getPosition().x + gui.box1.getSize().x) { // if the x position is on the first HUD button
-				std::cout << "Skills" << std::endl;
-				gui.skillsOpening();
-			}
-
-			if (mousePos.x >= gui.box2.getPosition().x && mousePos.x <= gui.box2.getPosition().x + gui.box2.getSize().x) { // if the x position is on the first HUD button
-																														   //Box 3
-				std::cout << "Inventory" << std::endl;
-				gui.inventoryOpening();
-			}
-		}
-		//Crafting button
-		if (mousePos.x >= gui.CraftButton.getPosition().x && mousePos.x <= gui.CraftButton.getPosition().x + gui.CraftButton.getSize().x) {
-			if (mousePos.y >= gui.CraftButton.getPosition().y && mousePos.y <= gui.CraftButton.getPosition().y + gui.CraftButton.getSize().y) {
-				gui.craftingOpening();
-			}
-		}
-		if (mousePos.x >= gui.CraftBox.getPosition().x && mousePos.x <= gui.CraftBox.getPosition().x + gui.CraftBox.getSize().x) {
-			if (mousePos.y >= gui.CraftBox.getPosition().y && mousePos.y <= gui.CraftBox.getPosition().y + gui.CraftBox.getSize().y) {
-				gui.craftButtonClicked();
-			}
-		}
-	}
 }
 
 void Game::updateCollision()
@@ -525,15 +496,15 @@ void Game::GUIOptions() {
 		gui.drawCraft(view, *this->window);
 	}
 }
-void Game::SkillIncrease() {
+void Game::SkillIncrease(sf::Keyboard::Key key) {
 	if (skills == bookshelfMenu) { // if the bookshelf is accessed, open up the skills item hud and increase knowledge by playing minigame (not yet implemented)
-		this->skillitems.knowledgeIncrease(*this->window, view);
+		this->skillitems.knowledgeIncrease(*this->window, view, key);
 	}
 	else if (skills == bikeMenu) { // if the bike is accessed, open up the skills item hud and increase knowledge by playing minigame (not yet implemented)
-		this->skillitems.staminaIncrease(*this->window, view);
+		this->skillitems.staminaIncrease(*this->window, view, key);
 	}
 	else if (skills == weightsMenu) { // if the weights bench is accessed, open up the skills item hud and increase knowledge by playing minigame (not yet implemented)
-		this->skillitems.strengthIncrease(*this->window, view);
+		this->skillitems.strengthIncrease(*this->window, view, key);
 	}
 }
 void Game::dialogueCheck() {
@@ -555,6 +526,7 @@ void Game::StateChange(sf::RenderTarget& target)
 	if (GameState == StartMenu) {
 		//std::cout << "Loading Start Menu" << std::endl;
 		this->menu.render(target);
+		this->menu.MouseHandler(*this->window);
 		this->startMenuStateChange();
 	}
 
@@ -565,6 +537,7 @@ void Game::StateChange(sf::RenderTarget& target)
 		this->options.render(*this->window);
 		//Selecting options in menu
 		this->optionsMenuStateChange();
+		this->options.mouseHandler(*this->window);
 		this->sfx.setMusicVolume(this->options);
 	}
 
@@ -573,6 +546,7 @@ void Game::StateChange(sf::RenderTarget& target)
 		//std::cout << "Loading Instructions Menu" << std::endl;
 		this->instructions.render(*this->window);
 		this->InstructionsMenuStateChange();
+		this->instructions.mouseHandler(*this->window);
 
 	}
 	// GAMESTATE --- SKILLS MENU ----
@@ -580,11 +554,19 @@ void Game::StateChange(sf::RenderTarget& target)
 		//std::cout << "Loading Skills Menu" << std::endl;
 		this->skillmenu.render(*this->window);
 		this->SkillsMenuStateChange();
+		this->skillmenu.mouseHandler(*this->window);
 
 	}
 	// GAMESTATE ---- PRISON BITCH ----
 	if (GameState == PrisonGame)
 	{
+		this->gui.MouseInput(*this->window);
+		if (gui.InvOpen == true) {
+			this->gui.craftingMouseInput(*this->window);
+		}
+		this->prisonD.mouseHandler(*this->window, this->gui);
+		
+		this->guardD.mouseHandler(*this->window, this->gui);
 		//std::cout << "Loading Game Menu" << std::endl;
 		this->drawGame();
 	}
@@ -638,7 +620,7 @@ void Game::SkillsMenuStateChange() {
 
 #pragma region DRAWING
 void Game::drawGame() {
-	this->sfx.pauseMenuMusic();
+	//this->sfx.pauseMenuMusic();
 	this->map.drawMap(*this->window);
 
 	this->renderPlayer(*this->window);
@@ -653,8 +635,8 @@ void Game::drawGame() {
 
 
 	this->drawInventoryOptions();
-	this->SkillIncrease();
 	this->GUIOptions();
+	this->SkillIncrease(this->ev.key.code);
 	this->dialogueCheck();
 }
 

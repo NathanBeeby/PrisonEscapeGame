@@ -10,13 +10,11 @@ class guardDialogue : virtual public Dialogue
 private:
 	// Variables
 	enum guardDialogueState { guardTalk, guardMissions, snitching, guardDialogueMenu, guardNoState };
-	std::string GM1;
-	std::string GM2;
-	std::string GM3;
-	std::string GM4;
-	std::string GM5;
-	std::string GM6;
-	std::string GM7;
+	
+	std::vector<bool> acceptedMission;
+	std::vector <std::string> GM;
+	std::vector<sf::Text>  missions;
+
 
 	sf::Font font;
 	sf::Text GuardText[guard_item_Number];
@@ -26,7 +24,7 @@ private:
 
 	int talkInt, missionsInt, offset, guardItemIndex;
 	int GetPressedItem() { return guardItemIndex; }
-
+	bool mousePress;
 	//Initialization
 	void initVariables();
 	void initSprites();
@@ -55,6 +53,11 @@ public:
 	void Snitch(sf::View &view, sf::RenderTarget& target);
 	void Mission(sf::View &view, sf::RenderTarget& target, GUI &gui);
 	void dialogueHandler(sf::View &view, sf::RenderTarget& target, GUI &gui);
+	void mouseHandler(sf::RenderWindow &window, GUI &gui);
+	void talkPressed(GUI &gui);
+	void snitchPressed(sf::RenderTarget &target, GUI &gui);
+	void missionsPressed(sf::RenderTarget &target, GUI &gui);
+
 
 	void update(sf::Time deltaTime);
 	void render(sf::RenderTarget &target);

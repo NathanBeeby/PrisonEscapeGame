@@ -22,6 +22,7 @@ private:
 
 	int talkInt, missionsInt, prisonItemIndex, offset;
 	int GetPressedItem() { return prisonItemIndex; }
+	bool mousePress;
 
 	guardDialogue guardD;
 	prisonerDialogueState prisonerDState;
@@ -52,6 +53,11 @@ public:
 	void Trade(sf::View &view, sf::RenderTarget& target);
 	void Mission(sf::View &view, sf::RenderTarget& target, GUI &gui);
 	void dialogueHandler(sf::View &view, sf::RenderTarget& target, GUI &gui);
+	void mouseHandler(sf::RenderWindow &window, GUI &gui);
+	void talkPressed(GUI &gui);
+	void tradePressed(sf::RenderTarget &target, GUI &gui);
+	void missionsPressed(sf::RenderTarget &target, GUI &gui);
+
 
 	void update(sf::Time deltaTime);
 	void render(sf::RenderTarget &target);

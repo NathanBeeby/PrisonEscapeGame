@@ -13,6 +13,7 @@ void Prisoner::initVariables()
 	// Integer Variables
 	this->move = 0;
 	this->time = 0;
+	this->health = 100;
 	this->prisonChoice = 0;
 	this->anim.x = 1;
 	this->moveSpeed = 2;
@@ -82,7 +83,7 @@ void Prisoner::initSprite()
 			sprites[i].setPosition(pos.x, pos.y);
 			sprites[i].setOrigin(size / 2.0f);
 			sprites[i].setSize(size);
-			sprites[i].setTexture(&spriteTexture[i]);
+			sprites[i].setTexture(&this->spriteTexture[i]);
 		}
 	}
 }
@@ -104,7 +105,7 @@ Prisoner::~Prisoner()
 const sf::Vector2f& Prisoner::getPos() const
 {
 	for (int i = 0; i < sprites.size(); i++) {
-		return sprites[i].getPosition();
+		return this->sprites[i].getPosition();
 	}
 }
 

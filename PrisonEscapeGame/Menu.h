@@ -33,7 +33,7 @@ public:
 	// Public Functions
 	void Up();
 	void Down();
-	void MouseHandler(sf::RenderTarget &target);
+	void MouseHandler(sf::RenderWindow &window);
 	void KeyHandler(sf::Keyboard::Key key);
 	void render(sf::RenderTarget &target);
 

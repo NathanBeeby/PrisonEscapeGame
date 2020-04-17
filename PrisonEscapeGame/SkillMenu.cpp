@@ -24,7 +24,7 @@ void SkillMenu::initVariables()
 
 void SkillMenu::initFont()
 {
-	if (!this->font.loadFromFile("../assets/text_assets/FontFile.ttf"))
+	if (!this->font.loadFromFile("../assets/text_assets/Font.ttf"))
 	{
 		// error...
 		//	std::cout << "Error loading file" << std::endl;
@@ -39,7 +39,7 @@ SkillMenu::SkillMenu()
 
 	//set the background, draw it out
 	SkillMenuText[0].setFont(font);
-	SkillMenuText[0].setCharacterSize(50);
+	SkillMenuText[0].setCharacterSize(35);
 	SkillMenuText[0].setFillColor(sf::Color::Blue);
 	SkillMenuText[0].setString("Strength");
 	SkillMenuText[0].setPosition(sf::Vector2f(50, this->height / (skill_item_Number + 8) * 1)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
@@ -47,40 +47,40 @@ SkillMenu::SkillMenu()
 
 
 	SkillMenuText[1].setFont(font);
-	SkillMenuText[1].setCharacterSize(50);
+	SkillMenuText[1].setCharacterSize(35);
 	SkillMenuText[1].setFillColor(sf::Color::White);
 	SkillMenuText[1].setString("Stamina");
 	SkillMenuText[1].setPosition(sf::Vector2f(50, this->height / (skill_item_Number + 6) * 2.5)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	SkillMenuText[2].setFont(font);
-	SkillMenuText[2].setCharacterSize(50);
+	SkillMenuText[2].setCharacterSize(35);
 	SkillMenuText[2].setFillColor(sf::Color::White);
 	SkillMenuText[2].setString("Endurance");
 	SkillMenuText[2].setPosition(sf::Vector2f(50, this->height / (skill_item_Number + 6) * 4)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	SkillMenuText[3].setFont(font);
-	SkillMenuText[3].setCharacterSize(50);
+	SkillMenuText[3].setCharacterSize(35);
 	SkillMenuText[3].setFillColor(sf::Color::White);
 	SkillMenuText[3].setString("Charisma");
 	SkillMenuText[3].setPosition(sf::Vector2f(50, this->height / (skill_item_Number + 6) * 5.5)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	SkillMenuText[4].setFont(font);
-	SkillMenuText[4].setCharacterSize(50);
+	SkillMenuText[4].setCharacterSize(35);
 	SkillMenuText[4].setFillColor(sf::Color::White);
 	SkillMenuText[4].setString("Knowledge");
 	SkillMenuText[4].setPosition(sf::Vector2f(50, this->height / (skill_item_Number + 6) * 7)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	SkillMenuText[5].setFont(font);
-	SkillMenuText[5].setCharacterSize(50);
+	SkillMenuText[5].setCharacterSize(60);
 	SkillMenuText[5].setFillColor(sf::Color::White);
 	SkillMenuText[5].setString("Exit");
-	SkillMenuText[5].setPosition(sf::Vector2f(100, this->height - 90)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	SkillMenuText[5].setPosition(sf::Vector2f(90, this->height - 100)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	SkillMenuText[6].setFont(font);
-	SkillMenuText[6].setCharacterSize(50);
+	SkillMenuText[6].setCharacterSize(60);
 	SkillMenuText[6].setFillColor(sf::Color::White);
 	SkillMenuText[6].setString("Game");
-	SkillMenuText[6].setPosition(sf::Vector2f(this->width - 150, this->height - 90)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	SkillMenuText[6].setPosition(sf::Vector2f(this->width - 170, this->height - 100)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	selectedItemIndex = 0;
 }
@@ -150,7 +150,7 @@ void SkillMenu::keyHandler(sf::Keyboard::Key key) {
 		switch (GetPressedItem()) {
 
 		case 0: std::cout << "Strength pressed" << std::endl;
-			if (startSkillPoints != 0) {
+			if (startSkillPoints > 0) {
 				this->player.addStrength(1);
 				startSkillPoints--;
 				//	playerStrength++;
@@ -304,8 +304,8 @@ void SkillMenu::drawBars(sf::RenderTarget &target) {
 
 	SpendPoints.setFont(font);
 	SpendPoints.setFillColor(sf::Color(255, 0, 0));
-	SpendPoints.setString("You have more Skillpoints to spend");
-	SpendPoints.setCharacterSize(50);
+	SpendPoints.setString("You have more \nSkillpoints to spend");
+	SpendPoints.setCharacterSize(30);
 	SpendPoints.setPosition(450, 100);
 
 	target.draw(StrBar);

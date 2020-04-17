@@ -125,25 +125,33 @@ const sf::FloatRect SkillItems::getBounds() const
 	}
 }
 
-void SkillItems::knowledgeIncrease(sf::RenderTarget &target, sf::View &view) {
+void SkillItems::knowledgeIncrease(sf::RenderTarget &target, sf::View &view, sf::Keyboard::Key key) {
 
 	knowledgeWindow.setPosition(view.getCenter().x - 125, view.getCenter().y - 130);
 	target.draw(knowledgeWindow);
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && this->player.getKnowledge() < 100) { this->player.addKnowledge(5); }
+	
+	if (key == sf::Keyboard::A && this->player.getKnowledge() < 100) {
+		this->player.addKnowledge(5); 
+		std::cout << "Knowledge + 5" << std::endl;
+	}
 
 }
 
-void SkillItems::strengthIncrease(sf::RenderTarget &target, sf::View &view) {
+void SkillItems::strengthIncrease(sf::RenderTarget &target, sf::View &view, sf::Keyboard::Key key) {
 	strengthWindow.setPosition(view.getCenter().x - 125, view.getCenter().y - 130);
 	target.draw(strengthWindow);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && this->player.getStrength() < 100) { this->player.addStrength(5); }
+	if (key == sf::Keyboard::A && this->player.getStrength() < 100) {
+		this->player.addStrength(5); 
+		std::cout << "Strength + 5" << std::endl;
+	}
 }
 
-void SkillItems::staminaIncrease(sf::RenderTarget &target, sf::View &view) {
+void SkillItems::staminaIncrease(sf::RenderTarget &target, sf::View &view, sf::Keyboard::Key key) {
 	bikeWindow.setPosition(view.getCenter().x - 125, view.getCenter().y - 130);
 	target.draw(bikeWindow);
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && this->player.getStamina() < 100) { this->player.addStamina(5); }
+	if (key == sf::Keyboard::A && this->player.getStamina() < 100) {
+		this->player.addStamina(5); 
+		std::cout << "Stamina + 5" << std::endl;
+	}
 }

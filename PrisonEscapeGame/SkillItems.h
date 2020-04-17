@@ -40,9 +40,9 @@ public:
 	const sf::FloatRect getBounds() const;
 
 	//Public fuctions
-	void knowledgeIncrease(sf::RenderTarget &target, sf::View &view);
-	void strengthIncrease(sf::RenderTarget &target, sf::View &view);
-	void staminaIncrease(sf::RenderTarget &target, sf::View &view);
+	void knowledgeIncrease(sf::RenderTarget &target, sf::View &view, sf::Keyboard::Key key);
+	void strengthIncrease(sf::RenderTarget &target, sf::View &view, sf::Keyboard::Key key);
+	void staminaIncrease(sf::RenderTarget &target, sf::View &view, sf::Keyboard::Key key);
 
 
 	void update(sf::Time deltaTime);

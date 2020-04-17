@@ -37,6 +37,7 @@ void GUI::initVariables()
 	this->InvOpen = false;
 	this->RepOpen = false;
 	this->craftOpen = false;
+	this->mousePress = false;
 	//String
 	this->prisonerFile = "../assets/text_assets/prisoners.txt";
 }
@@ -48,7 +49,7 @@ void GUI::initTextures()
 		system("pause");
 
 	}
-	if (!this->RoutineFont.loadFromFile("../assets/text_assets/FontFile.ttf")) {
+	if (!this->font.loadFromFile("../assets/text_assets/Font.ttf")) {
 		std::cout << "Load fail Error on HUDFont" << std::endl;
 		system("pause");
 	}
@@ -82,15 +83,6 @@ void GUI::initTextures()
 		system("pause");
 
 	}
-	if (!this->HUDFont.loadFromFile("../assets/text_assets/CagedPrisoner.ttf")) {
-		std::cout << "Load fail Error on HUDFont" << std::endl;
-		system("pause");
-	}
-	if (!this->HUDFont2.loadFromFile("../assets/text_assets/FontFile.ttf")) {
-		std::cout << "Load fail Error on HUDFont" << std::endl;
-		system("pause");
-	}
-
 	if (!this->poundTexture.loadFromFile("../assets/image_assets/PrisonPound.png")) {
 		std::cout << "Load fail Error on playerFaceTexture" << std::endl;
 		system("pause");
@@ -280,74 +272,75 @@ void GUI::initSprites()
 
 void GUI::initText()
 {
-	MissionsHeader.setFont(HUDFont);
+	MissionsHeader.setFont(font);
 	MissionsHeader.setFillColor(sf::Color(0, 0, 0, HUDopacity));
 	MissionsHeader.setString("Missions");
-	MissionsHeader.setCharacterSize(35);
+	MissionsHeader.setCharacterSize(30);
 
-	SkillsText.setFont(HUDFont);
+	SkillsText.setFont(font);
 	SkillsText.setFillColor(sf::Color(255, 255, 255, HUDopacity));
 	SkillsText.setString("Skills");
-	SkillsText.setCharacterSize(30);
+	SkillsText.setCharacterSize(25);
 
-	strengthText.setFont(HUDFont2);
+	strengthText.setFont(font);
 	strengthText.setFillColor(sf::Color(255, 255, 255, HUDopacity));
-	strengthText.setCharacterSize(35);
+	strengthText.setCharacterSize(30);
 
-	staminaText.setFont(HUDFont2);
+	staminaText.setFont(font);
 	staminaText.setFillColor(sf::Color(255, 255, 255, HUDopacity));
-	staminaText.setCharacterSize(35);
+	staminaText.setCharacterSize(30);
 
-	armourText.setFont(HUDFont2);
+	armourText.setFont(font);
 	armourText.setFillColor(sf::Color(255, 255, 255, HUDopacity));
-	armourText.setCharacterSize(35);
+	armourText.setCharacterSize(30);
 
-	charismaText.setFont(HUDFont2);
+	charismaText.setFont(font);
 	charismaText.setFillColor(sf::Color(255, 255, 255, HUDopacity));
-	charismaText.setCharacterSize(35);
+	charismaText.setCharacterSize(30);
 
-	knowledgeText.setFont(HUDFont2);
-	knowledgeText.setCharacterSize(35);
+	knowledgeText.setFont(font);
+	knowledgeText.setFillColor(sf::Color(255, 255, 255, HUDopacity));
+	knowledgeText.setCharacterSize(30);
 
-	InventoryText.setFont(HUDFont);
+	InventoryText.setFont(font);
 	InventoryText.setFillColor(sf::Color(255, 255, 255, HUDopacity));
 	InventoryText.setString("Inventory");
-	InventoryText.setCharacterSize(30);
+	InventoryText.setCharacterSize(25);
 
-	CraftText.setFont(HUDFont);
+	CraftText.setFont(font);
 	CraftText.setFillColor(sf::Color(255, 255, 255, HUDopacity));
 	CraftText.setString("Crafting");
 	CraftText.setCharacterSize(30);
 
 	this->moneyString = std::to_string(prisonMoney);
-	moneyText.setFont(HUDFont2);
+	moneyText.setFont(font);
 	moneyText.setString(moneyString);
 	moneyText.setFillColor(sf::Color(0, 0, 0));
 
-	HealthText.setFont(HUDFont);
+	HealthText.setFont(font);
 	HealthText.setString("Health");
-	HealthText.setCharacterSize(20);
+	HealthText.setCharacterSize(22);
 
-	XPText.setFont(HUDFont);
+	XPText.setFont(font);
 	XPText.setString("XP");
-	XPText.setCharacterSize(20);
+	XPText.setCharacterSize(22);
 
-	dayText.setFont(HUDFont2);
+	dayText.setFont(font);
 	dayText.setFillColor(sf::Color(0, 0, 0));
 
-	TimerText.setFont(HUDFont2);
+	TimerText.setFont(font);
 	TimerText.setFillColor(sf::Color(0, 0, 0));
 
-	LevelText.setFont(HUDFont2); // level text under the character icon
+	LevelText.setFont(font); // level text under the character icon
 	LevelText.setString("Level:");
 	LevelText.setCharacterSize(35);
 
 	this->lvlString = std::to_string(this->player.getLevel());
-	LevelString.setFont(HUDFont2);
+	LevelString.setFont(font);
 	LevelString.setString(lvlString);
 	LevelString.setCharacterSize(35);
 
-	submitText.setFont(HUDFont);
+	submitText.setFont(font);
 	submitText.setFillColor(sf::Color(255, 255, 255, HUDopacity));
 	submitText.setString("Craft Item");
 	submitText.setCharacterSize(30);
@@ -368,43 +361,69 @@ GUI::GUI() {
 GUI::~GUI()
 {
 
+
 }
 
 
-//void HUD::MouseInput(sf::RenderTarget& target) {
-//	sf::Vector2i mousePos = sf::Mouse::getPosition(target); // getting the position of the mouse relative to the window
-//	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
-//		if (mousePos.y >= box.getPosition().y && mousePos.y <= box.getPosition().y + box.getSize().y) { // if the y position is between the HUD button
-//			if (mousePos.x >= box.getPosition().x && mousePos.x <= box.getPosition().x + box.getSize().x) { // if the x position is on the first HUD button
-//			//Box 1
-//				std::cout << "Missions" << std::endl;
-//				missionsOpening();
-//			}
-//
-//			if (mousePos.x >= box1.getPosition().x && mousePos.x <= box1.getPosition().x + box1.getSize().x) { // if the x position is on the first HUD button
-//				std::cout << "Skills" << std::endl;
-//				skillsOpening();
-//			}
-//
-//			if (mousePos.x >= box2.getPosition().x && mousePos.x <= box2.getPosition().x + box2.getSize().x) { // if the x position is on the first HUD button
-//				//Box 3
-//				std::cout << "Inventory" << std::endl;
-//				inventoryOpening();
-//			}
-//		}
-//		//Crafting button
-//		if (mousePos.x >= CraftButton.getPosition().x && mousePos.x <= CraftButton.getPosition().x + CraftButton.getSize().x) {
-//			if (mousePos.y >= CraftButton.getPosition().y && mousePos.y <= CraftButton.getPosition().y + CraftButton.getSize().y) {
-//				craftingOpening();
-//			}
-//		}
-//		if (mousePos.x >= CraftBox.getPosition().x && mousePos.x <= CraftBox.getPosition().x + CraftBox.getSize().x) {
-//			if (mousePos.y >= CraftBox.getPosition().y && mousePos.y <= CraftBox.getPosition().y + CraftBox.getSize().y) {
-//				craftButtonClicked();
-//			}
-//		}
-//	}
-//}
+void GUI::MouseInput(sf::RenderWindow &window) {
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
+	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
+		if (worldPos.y >= box.getPosition().y && worldPos.y <= box.getPosition().y + box.getSize().y) { // if the y position is between the HUD button																							
+			if (worldPos.x >= box.getPosition().x && worldPos.x <= box.getPosition().x + box.getSize().x) { // if the x position is on the first HUD button
+					//Box 1
+				if (!mousePress) {
+					std::cout << "Missions" << std::endl;
+					missionsOpening();
+				}
+			}
+
+			if (worldPos.x >= box1.getPosition().x && worldPos.x <= box1.getPosition().x + box1.getSize().x) { // if the x position is on the first HUD button
+					//Box 2
+				if (!mousePress) {
+					std::cout << "Skills" << std::endl;
+					skillsOpening();
+				}
+			}
+
+			if (worldPos.x >= box2.getPosition().x && worldPos.x <= box2.getPosition().x + box2.getSize().x) { // if the x position is on the first HUD button
+					//Box 3
+				if (!mousePress) {
+					std::cout << "Inventory" << std::endl;
+					inventoryOpening();
+				}
+			}
+		}
+		this->mousePress = true;
+	}
+	else {
+		mousePress = false;
+	}
+}
+
+void GUI::craftingMouseInput(sf::RenderWindow &window)
+{
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
+	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
+
+		if (worldPos.x >= CraftButton.getPosition().x && worldPos.x <= CraftButton.getPosition().x + CraftButton.getSize().x) {
+			if (worldPos.y >= CraftButton.getPosition().y && worldPos.y <= CraftButton.getPosition().y + CraftButton.getSize().y) {
+				std::cout << "Inside craft button" << std::endl;
+				craftingOpening();
+			}
+		}
+
+		if (worldPos.x >= CraftBox.getPosition().x && worldPos.x <= CraftBox.getPosition().x + CraftBox.getSize().x) {
+			if (worldPos.y >= CraftBox.getPosition().y && worldPos.y <= CraftBox.getPosition().y + CraftBox.getSize().y) {
+				std::cout << "Inside Craft Box" << std::endl;
+				craftButtonClicked();
+			}
+		}
+	}
+}
 // Public Functions
 void GUI::skillsOpening() {
 	if (MisOpen == false && InvOpen == false) {
@@ -479,7 +498,7 @@ void GUI::craftingOpening() {
 }
 
 void GUI::craftButtonClicked() {
-	std::cout << "Crafted Something" << std::endl;
+	//std::cout << "Crafted Something" << std::endl;
 	craftOpen = false;
 	InvOpen = false;
 }
@@ -497,10 +516,10 @@ void GUI::Times(sf::View &view, sf::RenderTarget& target) {
 
 
 	for (int i = 0; i < routine.size(); i++) {
-		routine[i].setFont(RoutineFont);
-		routine[i].setCharacterSize(40);
+		routine[i].setFont(font);
+		routine[i].setCharacterSize(30);
 		routine[i].setFillColor(sf::Color(255, 255, 255));
-		routine[i].setPosition(view.getCenter().x + 260, view.getCenter().y - 210);
+		routine[i].setPosition(view.getCenter().x + 260, view.getCenter().y - 208);
 	}
 
 	if (GUITimeMinute >= 0 && GUITimeMinute <= 6) { // if between 0 - 7
@@ -562,7 +581,6 @@ void GUI::Times(sf::View &view, sf::RenderTarget& target) {
 } // THIS CAN BE REMOVED OR CHANGED AFTER ENUMERATIONS ADDED
 
 void GUI::drawInventory(sf::View &view, sf::RenderTarget& target) {
-
 	InventoryBox.setPosition(view.getCenter().x + 140, view.getCenter().y - 150);
 	InvSlot[0].setPosition(InventoryBox.getPosition().x + 160, InventoryBox.getPosition().y + 70);
 	InvSlot[1].setPosition(InvSlot[0].getPosition().x, InvSlot[0].getPosition().y + 50);
@@ -642,10 +660,10 @@ void GUI::drawGUI(sf::View &view, sf::RenderTarget& target) {
 	//Routine routine;
 
 	prisonPound.setPosition(view.getCenter().x - 25, view.getCenter().y - 280);
-	moneyText.setPosition(view.getCenter().x + 25, view.getCenter().y - 275);
+	moneyText.setPosition(view.getCenter().x + 45, view.getCenter().y - 275);
 	CashBox.setPosition(view.getCenter().x - 35, view.getCenter().y - 290);
-	HealthText.setPosition(view.getCenter().x - 250, view.getCenter().y - 282);
-	XPText.setPosition(view.getCenter().x - 220, view.getCenter().y - 252);
+	HealthText.setPosition(view.getCenter().x - 230, view.getCenter().y - 284);
+	XPText.setPosition(view.getCenter().x - 220, view.getCenter().y - 254);
 	dayText.setPosition(view.getCenter().x + 235, view.getCenter().y - 285);
 	TimerText.setPosition(view.getCenter().x + 235, view.getCenter().y - 245);
 	LevelText.setPosition(view.getCenter().x - 370, view.getCenter().y - 220);
@@ -657,7 +675,7 @@ void GUI::drawGUI(sf::View &view, sf::RenderTarget& target) {
 	health.setPosition(view.getCenter().x - 300, view.getCenter().y - 280);
 	noXP.setPosition(view.getCenter().x - 300, view.getCenter().y - 250);
 	XP.setPosition(view.getCenter().x - 300, view.getCenter().y - 250);
-	box.setPosition(view.getCenter().x - 160, view.getCenter().y - 220);
+	box.setPosition(view.getCenter().x - 160, view.getCenter().y - 220); //view.getCenter().x - 160, view.getCenter().y - 220
 	box1.setPosition(view.getCenter().x - 220, view.getCenter().y - 220);
 	box2.setPosition(view.getCenter().x - 280, view.getCenter().y - 220);
 	clockOuterBox.setPosition(view.getCenter().x + 220, view.getCenter().y - 290);
@@ -814,17 +832,18 @@ void GUI::drawSkills(sf::View &view, sf::RenderTarget& target) {
 
 	target.draw(SkillsBox);
 	target.draw(SkillsText);
-	target.draw(strengthText);
-	target.draw(staminaText);
-	target.draw(armourText);
-	target.draw(charismaText);
-	target.draw(knowledgeText);
 
 	target.draw(StrengthBar);
 	target.draw(StaminaBar);
 	target.draw(ArmourBar);
 	target.draw(CharismaBar);
 	target.draw(KnowledgeBar);
+
+	target.draw(strengthText);
+	target.draw(staminaText);
+	target.draw(armourText);
+	target.draw(charismaText);
+	target.draw(knowledgeText);
 
 	target.draw(Strength);
 	target.draw(Stamina);

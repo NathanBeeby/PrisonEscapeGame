@@ -16,7 +16,6 @@ private:
 	float height, width;
 	int startSkillPoints;
 
-
 	sf::Text SkillMenuText[skill_item_Number];
 
 	Player player;
@@ -25,9 +24,11 @@ private:
 	void initFont();
 
 public:
+	// Constructor / Destructor
 	SkillMenu();
 	virtual ~SkillMenu();
 
+	// Public Variables
 	bool exitPress;
 	bool gamePress;
 

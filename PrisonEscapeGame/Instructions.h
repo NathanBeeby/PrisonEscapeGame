@@ -40,7 +40,7 @@ public:
 
 	// Public Functions
 	void keyHandler(sf::Keyboard::Key key);
-	void mouseHandler(sf::RenderTarget &target);
+	void mouseHandler(sf::RenderWindow &window);
 
 	void backPressed();
 	void Up();

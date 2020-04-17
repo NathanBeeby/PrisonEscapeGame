@@ -28,22 +28,22 @@ void Menu::initSprites()
 void Menu::initText()
 {
 	this->MenuText[0].setFont(font);
-	this->MenuText[0].setCharacterSize(100);
+	this->MenuText[0].setCharacterSize(60);
 	this->MenuText[0].setFillColor(sf::Color::Blue);
 	this->MenuText[0].setString("Play");
-	this->MenuText[0].setPosition(sf::Vector2f(this->width / 2.3, this->height / (item_Number + 2) * 1)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	this->MenuText[0].setPosition(sf::Vector2f(this->width / 2.5, this->height / (item_Number + 2) * 1)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	this->MenuText[1].setFont(font);
-	this->MenuText[1].setCharacterSize(100);
+	this->MenuText[1].setCharacterSize(60);
 	this->MenuText[1].setFillColor(sf::Color::White);
 	this->MenuText[1].setString("Options");
-	this->MenuText[1].setPosition(sf::Vector2f(this->width / 2.3, this->height / (item_Number + 2) * 2)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	this->MenuText[1].setPosition(sf::Vector2f(this->width / 2.7, this->height / (item_Number + 2) * 2)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	this->MenuText[2].setFont(font);
-	this->MenuText[2].setCharacterSize(100);
+	this->MenuText[2].setCharacterSize(60);
 	this->MenuText[2].setFillColor(sf::Color::White);
 	this->MenuText[2].setString("Exit");
-	this->MenuText[2].setPosition(sf::Vector2f(this->width / 2.3, this->height / (item_Number + 2) * 3)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	this->MenuText[2].setPosition(sf::Vector2f(this->width / 2.5, this->height / (item_Number + 2) * 3)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 }
 
 void Menu::initTextures()
@@ -58,7 +58,7 @@ void Menu::initTextures()
 
 void Menu::initFont()
 {
-	if (!this->font.loadFromFile("../assets/text_assets/FontFile.ttf"))
+	if (!this->font.loadFromFile("../assets/text_assets/Font.ttf"))
 	{
 		// error...
 		std::cout << "Error loading file" << std::endl;
@@ -82,28 +82,28 @@ Menu::~Menu()
 }
 
 // Public FUnctions
-void Menu::MouseHandler(sf::RenderTarget &target) {
-	//sf::Vector2i mousePos = ::sf::Mouse::getPosition(target); // getting the position of the mouse relative to the window
-	//if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
-	//	if (mousePos.x >= MenuText[0].getPosition().x && mousePos.x <= MenuText[0].getPosition().x + 80) { // if the x position is on the first HUD button
-	//		if (mousePos.y >= MenuText[0].getPosition().y && mousePos.y <= MenuText[0].getPosition().y + 100) { // if the y position is between the HUD button
-	//			std::cout << "Play Button pressed" << std::endl;
-	//			playPressed = true;
-	//		}
-	//	}
-	//	if (mousePos.x >= MenuText[1].getPosition().x && mousePos.x <= MenuText[1].getPosition().x + 130) { // if the x position is on the first HUD button
-	//		if (mousePos.y >= MenuText[1].getPosition().y && mousePos.y <= MenuText[1].getPosition().y + 100) { // if the y position is between the HUD button
-	//			std::cout << "Options Button pressed" << std::endl;
-	//			optionsPressed = true;
-	//		}
-	//	}
-	//	if (mousePos.x >= MenuText[2].getPosition().x && mousePos.x <= MenuText[2].getPosition().x + 100) { // if the x position is on the first HUD button
-	//		if (mousePos.y >= MenuText[2].getPosition().y && mousePos.y <= MenuText[2].getPosition().y + 100) { // if the y position is between the HUD button
-	//			std::cout << "Exit Button pressed" << std::endl;
-	//			exitPressed = true;
-	//		}
-	//	}
-	//}
+void Menu::MouseHandler(sf::RenderWindow &window) {
+	sf::Vector2i mousePos = ::sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
+		if (mousePos.x >= MenuText[0].getPosition().x && mousePos.x <= MenuText[0].getPosition().x + 80) { // if the x position is on the first HUD button
+			if (mousePos.y >= MenuText[0].getPosition().y && mousePos.y <= MenuText[0].getPosition().y + 100) { // if the y position is between the HUD button
+				std::cout << "Play Button pressed" << std::endl;
+				playPressed = true;
+			}
+		}
+		if (mousePos.x >= MenuText[1].getPosition().x && mousePos.x <= MenuText[1].getPosition().x + 130) { // if the x position is on the first HUD button
+			if (mousePos.y >= MenuText[1].getPosition().y && mousePos.y <= MenuText[1].getPosition().y + 100) { // if the y position is between the HUD button
+				std::cout << "Options Button pressed" << std::endl;
+				optionsPressed = true;
+			}
+		}
+		if (mousePos.x >= MenuText[2].getPosition().x && mousePos.x <= MenuText[2].getPosition().x + 100) { // if the x position is on the first HUD button
+			if (mousePos.y >= MenuText[2].getPosition().y && mousePos.y <= MenuText[2].getPosition().y + 100) { // if the y position is between the HUD button
+				std::cout << "Exit Button pressed" << std::endl;
+				exitPressed = true;
+			}
+		}
+	}
 }
 
 void Menu::KeyHandler(sf::Keyboard::Key key) {

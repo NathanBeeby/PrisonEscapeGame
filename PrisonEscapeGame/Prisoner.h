@@ -2,9 +2,6 @@
 
 #include "NPC.h"
 
-#include "Player.h"
-#include "GUI.h"
-
 class Prisoner : virtual public NPC
 {
 private:
@@ -19,13 +16,6 @@ private:
 	sf::Vector2i yardWaypoint; // shower time
 	sf::Vector2i freeWaypoint; // free time area waypoint
 
-							   //std::stringstream pss;
-							   //std::string prisonerFile;
-							   //std::string prisonerfilename;
-							   //std::string ps;
-							   //std::string prisonerPath;
-							   //std::ifstream myInputFile;
-							   //std::vector<sf::Texture>  spriteTexture;
 	std::vector<sf::Vector2f> vel;
 	std::vector<sf::Vector2f> lastVelocity;
 	std::vector<Dir> lastPrisonerPosition;

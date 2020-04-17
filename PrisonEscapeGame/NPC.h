@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Character.h"
+#include "GUI.h"
 #include <fstream>
 #include <sstream>
 #include <string>

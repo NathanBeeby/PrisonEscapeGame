@@ -23,6 +23,7 @@ void Player::initVariables()
 	this->playerLevel = 1;
 	this->lastPosition = Down;
 	this->CharAnim.y = Down;
+	std::cout << "Player Initialized" << std::endl;
 }
 
 void Player::initSprite()
@@ -30,6 +31,7 @@ void Player::initSprite()
 	this->sprite.setSize(sf::Vector2f(playerSize.x, playerSize.y));
 	this->sprite.setOrigin(sf::Vector2f(playerSize.x / 2.f, playerSize.y / 2.f));
 	this->sprite.setTexture(&spriteTexture);
+	sprite.setTextureRect(sf::IntRect(CharAnim.x * 32, CharAnim.y * 32, 32, 32)); // drawing the rectangles position, width and height
 	this->sprite.setPosition(sf::Vector2f(playerPosition.x, playerPosition.y));
 }
 
@@ -42,8 +44,8 @@ void Player::initTextures()
 //Constructor / Destructor
 Player::Player() {
 	this->initVariables();
-	this->initSprite();
 	this->initTextures();
+	this->initSprite();
 }
 
 Player::~Player()
@@ -171,7 +173,7 @@ const int Player::getStrength() const
 
 const int Player::getStamina() const
 {
-	std::cout << "player strength is now: " << this->playerStamina << std::endl;
+	std::cout << "player Stamina is now: " << this->playerStamina << std::endl;
 	return this->playerStamina;
 }
 

@@ -20,7 +20,7 @@ void OptionsMenu::initVariables()
 
 void OptionsMenu::initFont()
 {
-	if (!font.loadFromFile("../assets/text_assets/FontFile.ttf"))
+	if (!font.loadFromFile("../assets/text_assets/Font.ttf"))
 	{
 		// error...
 		std::cout << "Error loading file" << std::endl;
@@ -34,31 +34,31 @@ OptionsMenu::OptionsMenu()
 	this->initFont();
 
 	OptionsMenuText[0].setFont(font);
-	OptionsMenuText[0].setCharacterSize(100);
+	OptionsMenuText[0].setCharacterSize(60);
 	OptionsMenuText[0].setFillColor(sf::Color::Blue);
 	OptionsMenuText[0].setString("Sound");
-	OptionsMenuText[0].setPosition(sf::Vector2f(130, 30)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	OptionsMenuText[0].setPosition(sf::Vector2f(130, 45)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 
 
 	OptionsMenuText[1].setFont(font);
-	OptionsMenuText[1].setCharacterSize(100);
+	OptionsMenuText[1].setCharacterSize(60);
 	OptionsMenuText[1].setFillColor(sf::Color::White);
 	OptionsMenuText[1].setString("Music");
-	OptionsMenuText[1].setPosition(sf::Vector2f(130, 130)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	OptionsMenuText[1].setPosition(sf::Vector2f(130, 145)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	OptionsMenuText[2].setFont(font);
-	OptionsMenuText[2].setCharacterSize(100);
+	OptionsMenuText[2].setCharacterSize(60);
 	OptionsMenuText[2].setFillColor(sf::Color::White);
 	OptionsMenuText[2].setString("Instructions");
-	OptionsMenuText[2].setPosition(sf::Vector2f(this->width / 2.5, this->height / 2.5)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	OptionsMenuText[2].setPosition(sf::Vector2f(this->width / 2.8, this->height / 1.4)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 
 	OptionsMenuText[3].setFont(font);
-	OptionsMenuText[3].setCharacterSize(100);
+	OptionsMenuText[3].setCharacterSize(60);
 	OptionsMenuText[3].setFillColor(sf::Color::White);
 	OptionsMenuText[3].setString("Back");
-	OptionsMenuText[3].setPosition(sf::Vector2f(40, this->height - 120)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	OptionsMenuText[3].setPosition(sf::Vector2f(40, this->height - 100)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 
 	selectedItemIndex = 0;

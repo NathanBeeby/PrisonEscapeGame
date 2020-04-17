@@ -40,42 +40,37 @@ void Instructions::initSprites()
 void Instructions::initText()
 {
 	this->InstructionsMenuText[0].setFont(font);
-	this->InstructionsMenuText[0].setCharacterSize(100);
+	this->InstructionsMenuText[0].setCharacterSize(60);
 	this->InstructionsMenuText[0].setFillColor(sf::Color::Blue);
 	this->InstructionsMenuText[0].setString("Keys");
 	this->InstructionsMenuText[0].setPosition(sf::Vector2f(50, 20)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	this->InstructionsMenuText[1].setFont(font);
-	this->InstructionsMenuText[1].setCharacterSize(100);
+	this->InstructionsMenuText[1].setCharacterSize(60);
 	this->InstructionsMenuText[1].setFillColor(sf::Color::White);
 	this->InstructionsMenuText[1].setString("Crafting");
 	this->InstructionsMenuText[1].setPosition(sf::Vector2f(50, 120)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	this->InstructionsMenuText[2].setFont(font);
-	this->InstructionsMenuText[2].setCharacterSize(100);
+	this->InstructionsMenuText[2].setCharacterSize(60);
 	this->InstructionsMenuText[2].setFillColor(sf::Color::White);
 	this->InstructionsMenuText[2].setString("Skills");
 	this->InstructionsMenuText[2].setPosition(sf::Vector2f(50, 220)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	this->InstructionsMenuText[3].setFont(font);
-	this->InstructionsMenuText[3].setCharacterSize(100);
+	this->InstructionsMenuText[3].setCharacterSize(60);
 	this->InstructionsMenuText[3].setFillColor(sf::Color::White);
 	this->InstructionsMenuText[3].setString("Routine");
 	this->InstructionsMenuText[3].setPosition(sf::Vector2f(50, 320)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	this->InstructionsMenuText[4].setFont(font);
-	this->InstructionsMenuText[4].setCharacterSize(100);
+	this->InstructionsMenuText[4].setCharacterSize(60);
 	this->InstructionsMenuText[4].setFillColor(sf::Color::White);
 	this->InstructionsMenuText[4].setString("Back");
-	this->InstructionsMenuText[4].setPosition(sf::Vector2f(60, this->height - 120)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	this->InstructionsMenuText[4].setPosition(sf::Vector2f(this->width - 160, this->height - 100)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
-	this->InstructionsMenuText[5].setFont(font);
-	this->InstructionsMenuText[5].setCharacterSize(100);
-	this->InstructionsMenuText[5].setFillColor(sf::Color::White);
-	this->InstructionsMenuText[5].setString("Next");
-	this->InstructionsMenuText[5].setPosition(sf::Vector2f(this->width - 160, this->height - 120)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
-																									// String Variables
+	// String Variables
 	this->first3Keys[0].setString("Movement Keys");
 	this->first3Keys[1].setString("Selecting Item in menu");
 	this->first3Keys[2].setString("Attack button");
@@ -108,28 +103,28 @@ void Instructions::initText()
 
 	for (int i = 0; i < first3Keys.size(); i++) {
 		first3Keys[i].setFont(keyFont);
-		first3Keys[i].setCharacterSize(40); // setting the character size
+		first3Keys[i].setCharacterSize(20); // setting the character size
 		first3Keys[i].setFillColor(sf::Color(0, 0, 0));
 	}
 	for (int i = 0; i < KeyInstruction.size(); i++) {
 		KeyInstruction[i].setFont(keyFont);
-		KeyInstruction[i].setCharacterSize(40); // setting the character size
+		KeyInstruction[i].setCharacterSize(20); // setting the character size
 		KeyInstruction[i].setFillColor(sf::Color(0, 0, 0));
 	}
 	for (int i = 0; i < skillsTitle.size(); i++) {
 		skillsTitle[i].setFont(keyFont);
-		skillsTitle[i].setCharacterSize(40);
+		skillsTitle[i].setCharacterSize(20);
 		skillsTitle[i].setFillColor(sf::Color(255, 0, 255));
 	}
 	for (int i = 0; i < skillsInstruction.size(); i++) {
 		skillsInstruction[i].setFont(keyFont);
-		skillsInstruction[i].setCharacterSize(40);
+		skillsInstruction[i].setCharacterSize(20);
 		skillsInstruction[i].setFillColor(sf::Color(0, 0, 0));
 	}
 
 	for (int i = 0; i < routineInstruction.size(); i++) {
 		routineInstruction[i].setFont(keyFont);
-		routineInstruction[i].setCharacterSize(40); // setting the character size
+		routineInstruction[i].setCharacterSize(20); // setting the character size
 		routineInstruction[i].setFillColor(sf::Color(0, 0, 0));
 	}
 }
@@ -151,13 +146,13 @@ void Instructions::initTextures()
 
 void Instructions::initFont()
 {
-	if (!this->font.loadFromFile("../assets/text_assets/FontFile.ttf"))
+	if (!this->font.loadFromFile("../assets/text_assets/Font.ttf"))
 	{
 		// error...
 		std::cout << "Error loading file" << std::endl;
 		system("pause");
 	}
-	if (!this->keyFont.loadFromFile("../assets/text_assets/fontFile.ttf")) {
+	if (!this->keyFont.loadFromFile("../assets/text_assets/Font.ttf")) {
 		std::cout << "Load fail Error on keyFont" << std::endl;
 		system("pause");
 	}
@@ -207,9 +202,6 @@ void Instructions::keyHandler(sf::Keyboard::Key key) {
 			backPressed();
 
 			break;
-		case 5: std::cout << "Next" << std::endl;
-			//this can have functionality later when more information is needed to be inputted into the instructions menu
-			break;
 		}
 	}
 }
@@ -221,14 +213,16 @@ void Instructions::KeysSubMenu(sf::RenderTarget &target) {
 
 	first3Keys[0].setPosition(target.getSize().x / 2 + 100, 45);
 	first3Keys[1].setPosition(target.getSize().x / 2 + 100, 110);
-	first3Keys[2].setPosition(target.getSize().x / 2 + 100, 170);
+	first3Keys[2].setPosition(target.getSize().x / 2 + 100, 180);
 
 	target.draw(keyBox);
+
 	for (int i = 0; i < first3Keys.size(); i++) {
 		target.draw(first3Keys[i]);
 	}
+
 	for (int i = 0; i < KeyInstruction.size(); i++) {
-		KeyInstruction[i].setPosition(target.getSize().x / 2 + 100, target.getSize().y / 2 - 100 + (i * 40));
+		KeyInstruction[i].setPosition(target.getSize().x / 2 + 100, target.getSize().y / 2 - 90 + (i * 40));
 		target.draw(KeyInstruction[i]);
 	}
 }
@@ -246,7 +240,7 @@ void Instructions::SkillsSubMenu(sf::RenderTarget &target) {
 	//window.draw(skillBox);
 
 	for (int i = 0; i < skillsTitle.size(); i++) {
-		skillsTitle[i].setPosition(target.getSize().x / 2 + 130, 20 + (i * 80));
+		skillsTitle[i].setPosition(target.getSize().x / 2 + 130, 30 + (i * 80));
 		target.draw(skillsTitle[i]);
 	}
 	for (int i = 0; i < skillsInstruction.size(); i++) {
@@ -276,24 +270,44 @@ void Instructions::backPressed() {
 	this->backPress = true;
 }
 
-void Instructions::mouseHandler(sf::RenderTarget &target) {
-	//sf::Vector2i mousePos = ::sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
-	//if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
-	//	if (mousePos.x >= InstructionsMenuText[4].getPosition().x && mousePos.x <= InstructionsMenuText[4].getPosition().x + 115) { // if the x position is on the first HUD button
-	//		if (mousePos.y >= InstructionsMenuText[4].getPosition().y && mousePos.y <= InstructionsMenuText[4].getPosition().y + 100) { // if the y position is between the HUD button
-	//			std::cout << "Exit Button pressed" << std::endl;
-	//			backPressed();
+void Instructions::mouseHandler(sf::RenderWindow &window) {
+	sf::Vector2i mousePos = ::sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
 
-	//		}
-	//	}
-	//	if (mousePos.x >= InstructionsMenuText[5].getPosition().x && mousePos.x <= InstructionsMenuText[5].getPosition().x + 115) { // if the x position is on the first HUD button
-	//		if (mousePos.y >= InstructionsMenuText[5].getPosition().y && mousePos.y <= InstructionsMenuText[5].getPosition().y + 100) { // if the y position is between the HUD button
-	//			std::cout << "next Button pressed" << std::endl;
-	//			nextPress = true;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
 
-	//		}
-	//	}
-	//}
+		if (mousePos.x >= InstructionsMenuText[0].getPosition().x && mousePos.x <= InstructionsMenuText[0].getPosition().x + 115) { // if the x position is on the first HUD button
+			if (mousePos.y >= InstructionsMenuText[0].getPosition().y && mousePos.y <= InstructionsMenuText[0].getPosition().y + 100) { // if the y position is between the HUD button
+				std::cout << "Keys" << std::endl;
+				state = keysState;
+			}
+		}
+
+		if (mousePos.x >= InstructionsMenuText[1].getPosition().x && mousePos.x <= InstructionsMenuText[1].getPosition().x + 115) { // if the x position is on the first HUD button
+			if (mousePos.y >= InstructionsMenuText[1].getPosition().y && mousePos.y <= InstructionsMenuText[1].getPosition().y + 100) { // if the y position is between the HUD button
+				std::cout << "Crafting" << std::endl;
+				state = craftState;
+			}
+		}
+		if (mousePos.x >= InstructionsMenuText[2].getPosition().x && mousePos.x <= InstructionsMenuText[2].getPosition().x + 115) { // if the x position is on the first HUD button
+			if (mousePos.y >= InstructionsMenuText[2].getPosition().y && mousePos.y <= InstructionsMenuText[2].getPosition().y + 100) { // if the y position is between the HUD button
+				std::cout << "Skills" << std::endl;
+				state = skillState;
+			}
+		}
+		if (mousePos.x >= InstructionsMenuText[3].getPosition().x && mousePos.x <= InstructionsMenuText[3].getPosition().x + 115) { // if the x position is on the first HUD button
+			if (mousePos.y >= InstructionsMenuText[3].getPosition().y && mousePos.y <= InstructionsMenuText[3].getPosition().y + 100) { // if the y position is between the HUD button
+				std::cout << "Routine" << std::endl;
+				state = routineState;
+			}
+		}
+
+		if (mousePos.x >= InstructionsMenuText[4].getPosition().x && mousePos.x <= InstructionsMenuText[4].getPosition().x + 115) { // if the x position is on the first HUD button
+			if (mousePos.y >= InstructionsMenuText[4].getPosition().y && mousePos.y <= InstructionsMenuText[4].getPosition().y + 100) { // if the y position is between the HUD button
+				std::cout << "Exit Button pressed" << std::endl;
+				backPressed();
+			}
+		} 
+	}
 }
 
 void Instructions::Up() {

@@ -119,7 +119,6 @@ public:
 	void updateGameState(sf::Keyboard::Key key);
 	void updatePollEvents(sf::Time deltaTime);
 	void keyHandler(sf::Keyboard::Key key);
-	void updateMouseInput();
 	void updateCollision();
 	void updateView();
 	void update(sf::Time deltaTime);
@@ -136,7 +135,7 @@ public:
 	void drawInventoryOptions();
 
 	void GUIOptions();
-	void SkillIncrease();
+	void SkillIncrease(sf::Keyboard::Key key);
 	void dialogueCheck();
 
 	//Render / Draw

@@ -9,6 +9,7 @@ void guardDialogue::initVariables()
 	this->offset = 12;
 	//Boolean Variables
 	this->dialogueCheck = false;
+	this->mousePress = false;
 	// Gamestate Variables
 	this->guardDState = guardDialogueMenu; // setting the state for the dialogue
 }
@@ -41,14 +42,6 @@ void guardDialogue::initText()
 	this->GuardText[0].setFillColor(sf::Color::Blue);
 	this->GuardText[0].setString("Talk");
 
-	this->GM1 = "I need you to help break up a fight";
-	this->GM2 = "I need you to retrieve a guard uniform";
-	this->GM3 = "Find me hidden weapons";
-	this->GM4 = "Go find me some scrap metal";
-	this->GM5 = "Snitch on 5 prisoners";
-	this->GM6 = "Find some information for me";
-	this->GM7 = "Go find me a cookie";
-
 	this->GuardText[1].setFont(font);
 	this->GuardText[1].setCharacterSize(50);
 	this->GuardText[1].setFillColor(sf::Color::Black);
@@ -58,6 +51,16 @@ void guardDialogue::initText()
 	this->GuardText[2].setCharacterSize(50);
 	this->GuardText[2].setFillColor(sf::Color::Black);
 	this->GuardText[2].setString("Mission");
+
+	this->GM.resize(7);
+	this->GM[0] = "Go find me a cookie";
+	this->GM[1] = "I need you to help break up a fight";
+	this->GM[2] = "I need you to retrieve a guard uniform";
+	this->GM[3] = "Find me hidden weapons";
+	this->GM[4] = "Go find me some scrap metal";
+	this->GM[5] = "Snitch on 5 prisoners";
+	this->GM[6] = "Find some information for me";
+
 }
 
 void guardDialogue::initTextures()
@@ -78,7 +81,7 @@ void guardDialogue::initTextures()
 
 void guardDialogue::initFont()
 {
-	if (!this->font.loadFromFile("../assets/text_assets/FontFile.ttf"))
+	if (!this->font.loadFromFile("../assets/text_assets/Font.ttf"))
 	{
 		std::cout << "Font File for guard dialogue could not be found" << std::endl;
 		system("pause"); // pausing out on the console
@@ -225,13 +228,13 @@ void guardDialogue::Mission(sf::View &view, sf::RenderTarget &target, GUI &gui) 
 
 	std::vector<sf::Text>  guardmissions(7, sf::Text(missionDialogue));
 
-	guardmissions[0].setString(GM1);
-	guardmissions[1].setString(GM2);
-	guardmissions[2].setString(GM3);
-	guardmissions[3].setString(GM4);
-	guardmissions[4].setString(GM5);
-	guardmissions[5].setString(GM6);
-	guardmissions[6].setString(GM7);
+	guardmissions[0].setString(GM[0]);
+	guardmissions[1].setString(GM[1]);
+	guardmissions[2].setString(GM[2]);
+	guardmissions[3].setString(GM[3]);
+	guardmissions[4].setString(GM[4]);
+	guardmissions[5].setString(GM[5]);
+	guardmissions[6].setString(GM[6]);
 
 	for (int i = 0; i < guardmissions.size(); i++) {
 		guardmissions[i].setFont(font);
@@ -281,46 +284,13 @@ void guardDialogue::dialogueHandler(sf::View &view, sf::RenderTarget &target, GU
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
 			switch (GetPressedItem()) {
 			case 0: std::cout << "Talk" << std::endl;
-				gui.guardRep += 2;
-				guardDState = guardTalk; // setting the state to guard talk
-				talkInt = rand() % 6;
-				gui.charIncrement += 1;
-
+				this->talkPressed(gui);
 				break;
 			case 1: std::cout << "Snitch" << std::endl;
-				if (gui.guardRep > 30) {
-					gui.prisonerRep -= 10;
-					gui.guardRep += 5;
-					guardDState = snitching; // setting the state to snitching
-					gui.guardRep += 10;
-				}
-				else {
-					std::cout << "You need at least 20 guard rep to do this" << std::endl;
-					repText.setString("You need a higher guard reputation");
-					repText.setFont(font);
-					repText.setCharacterSize(40);
-					repText.setFillColor(sf::Color(0, 0, 255));
-					repText.setPosition(DialogueBox.getPosition().x + 80, DialogueBox.getPosition().y - 50);
-					target.draw(repText);
-				}
+				this->snitchPressed(target, gui);
 				break;
 			case 2: std::cout << "Missions" << std::endl;
-				if (gui.guardRep > 60) {
-					gui.guardRep += 7;
-					gui.prisonerRep -= 7;
-					guardDState = guardMissions; //setting the state to guard missions
-					missionsInt = rand() % 6;
-				}
-				else {
-					std::cout << "You need 40 guard rep to do this" << std::endl;
-					sf::Text repText;
-					repText.setString("You need a higher guard reputation");
-					repText.setFont(font);
-					repText.setCharacterSize(40);
-					repText.setFillColor(sf::Color(0, 0, 255));
-					repText.setPosition(DialogueBox.getPosition().x + 80, DialogueBox.getPosition().y - 50);
-					target.draw(repText);
-				}
+				this->missionsPressed(target, gui);
 				break;
 
 			}
@@ -354,6 +324,124 @@ void guardDialogue::dialogueHandler(sf::View &view, sf::RenderTarget &target, GU
 		dialogueCheck = false;
 	}
 
+}
+
+void guardDialogue::mouseHandler(sf::RenderWindow &window, GUI &gui)
+{
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
+	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+		// Accept Mission
+		if (worldPos.x >= acceptButton.getPosition().x && worldPos.x <= acceptButton.getPosition().x + 200) {
+			if (worldPos.y >= acceptButton.getPosition().y && worldPos.y <= acceptButton.getPosition().y + 50) {
+				if (!mousePress) {
+					std::cout << "Mission Accepted:" << missionsInt << std::endl; // use this for trade functionality later, give positive rep to player for accepting
+					guardDState = guardDialogueMenu;
+					gui.missions.push_back(missions[missionsInt]);
+					dialogueCheck = false;
+				}
+			}
+		}
+		// Decine Mission
+		if (worldPos.x >= declineButton.getPosition().x && worldPos.x <= declineButton.getPosition().x + 200) {
+			if (worldPos.y >= declineButton.getPosition().y && worldPos.y <= declineButton.getPosition().y + 50) {
+				if (!mousePress) {
+					std::cout << "Mission Declined" << std::endl; // use this for trade functionality later,give negative rep to player for declining
+					guardDState = guardDialogueMenu;
+					dialogueCheck = false;
+				}
+			}
+		}
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
+		std::cout << "Clicked inside Box" << std::endl;
+
+		if (worldPos.x >= GuardText[0].getPosition().x && worldPos.x <= GuardText[0].getPosition().x + 200) {
+			if (worldPos.y >= GuardText[0].getPosition().y && worldPos.y <= GuardText[0].getPosition().y + 50) {
+				if (!mousePress) {
+					std::cout << "Talk Clicked" << std::endl;
+					this->talkPressed(gui);
+				}
+			}
+		}
+
+		if (worldPos.x >= GuardText[1].getPosition().x && worldPos.x <= GuardText[1].getPosition().x + 200) {
+			if (worldPos.y >= GuardText[1].getPosition().y && worldPos.y <= GuardText[1].getPosition().y + 50) {
+				if (!mousePress) {
+					std::cout << "Snitch Clicked" << std::endl;
+					this->snitchPressed(window, gui);
+				}
+			}
+		}
+
+		if (worldPos.x >= GuardText[2].getPosition().x && worldPos.x <= GuardText[2].getPosition().x + 200) {
+			if (worldPos.y >= GuardText[2].getPosition().y && worldPos.y <= GuardText[2].getPosition().y + 50) {
+				if (!mousePress) {
+					std::cout << "Missions Clicked" << std::endl;
+					this->missionsPressed(window, gui);
+				}
+			}
+		}
+		// Close Button on Talk
+		if (worldPos.x >= cancelButton.getPosition().x && worldPos.x <= cancelButton.getPosition().x + 200) {
+			if (worldPos.y >= cancelButton.getPosition().y && worldPos.y <= cancelButton.getPosition().y + 50) {
+				if (!mousePress) {
+					guardDState = guardDialogueMenu;
+					dialogueCheck = false;
+				}
+			}
+		}
+	}
+	else {
+		mousePress = false;
+	}
+}
+
+void guardDialogue::talkPressed(GUI & gui)
+{
+	gui.guardRep += 2;
+	guardDState = guardTalk; // setting the state to guard talk
+	talkInt = rand() % 6;
+	gui.charIncrement += 1;
+
+}
+
+void guardDialogue::snitchPressed(sf::RenderTarget & target, GUI & gui)
+{
+	if (gui.guardRep > 30) {
+		gui.prisonerRep -= 10;
+		gui.guardRep += 5;
+		guardDState = snitching; // setting the state to snitching
+		gui.guardRep += 10;
+	}
+	else {
+		std::cout << "You need at least 20 guard rep to do this" << std::endl;
+		repText.setString("You need a higher guard reputation");
+		repText.setFont(font);
+		repText.setCharacterSize(40);
+		repText.setFillColor(sf::Color(0, 0, 255));
+		repText.setPosition(DialogueBox.getPosition().x + 80, DialogueBox.getPosition().y - 50);
+		target.draw(repText);
+	}
+}
+
+void guardDialogue::missionsPressed(sf::RenderTarget & target, GUI & gui)
+{
+	if (gui.guardRep > 60) {
+		gui.guardRep += 7;
+		gui.prisonerRep -= 7;
+		guardDState = guardMissions; //setting the state to guard missions
+		missionsInt = rand() % 6;
+	}
+	else {
+		std::cout << "You need 40 guard rep to do this" << std::endl;
+		sf::Text repText;
+		repText.setString("You need a higher guard reputation");
+		repText.setFont(font);
+		repText.setCharacterSize(40);
+		repText.setFillColor(sf::Color(0, 0, 255));
+		repText.setPosition(DialogueBox.getPosition().x + 80, DialogueBox.getPosition().y - 50);
+		target.draw(repText);
+	}
 }
 
 void guardDialogue::update(sf::Time deltaTime)

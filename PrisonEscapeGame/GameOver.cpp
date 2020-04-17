@@ -42,7 +42,7 @@ void GameOver::initFont()
 		std::cout << "Cannot find gameover texture" << std::endl;
 		system("pause");
 	}
-	if (!this->font.loadFromFile("../assets/text_assets/FontFile.ttf"))
+	if (!this->font.loadFromFile("../assets/text_assets/Font.ttf"))
 	{
 		system("pause");
 	}
@@ -79,29 +79,29 @@ void GameOver::Down() {
 	}
 }
 
-void GameOver::MouseHandler(sf::RenderTarget &target) {
+void GameOver::MouseHandler(sf::RenderWindow &window) {
 	//ISSUE HERE IS THAT VIEW HAS MOVED
-	//sf::Vector2i mousePos = sf::Mouse::getPosition(target); // getting the position of the mouse relative to the window
-	//std::cout << "Mouse Pos - X: " << mousePos.x << ", Y: " << mousePos.y << std::endl;
-	//std::cout << "ExitMenuText 0 Pos - X: " << ExitMenuText[0].getPosition().x << ", Y: " << ExitMenuText[0].getPosition().y << std::endl;
-	//std::cout << "ExitMenuText 1 Pos - X: " << ExitMenuText[1].getPosition().x << ", Y: " << ExitMenuText[1].getPosition().y << std::endl;
-	//if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
-	//	if (mousePos.x >= ExitMenuText[0].getPosition().x && mousePos.x <= ExitMenuText[0].getPosition().x + 115) { // if the x position is on the first HUD button
-	//		if (mousePos.y >= ExitMenuText[0].getPosition().y && mousePos.y <= ExitMenuText[0].getPosition().y + 100) { // if the y position is between the HUD button
-	//			std::cout << "rety Button pressed" << std::endl;
-	//			
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
+	std::cout << "Mouse Pos - X: " << mousePos.x << ", Y: " << mousePos.y << std::endl;
+	std::cout << "ExitMenuText 0 Pos - X: " << ExitMenuText[0].getPosition().x << ", Y: " << ExitMenuText[0].getPosition().y << std::endl;
+	std::cout << "ExitMenuText 1 Pos - X: " << ExitMenuText[1].getPosition().x << ", Y: " << ExitMenuText[1].getPosition().y << std::endl;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
+		if (mousePos.x >= ExitMenuText[0].getPosition().x && mousePos.x <= ExitMenuText[0].getPosition().x + 115) { // if the x position is on the first HUD button
+			if (mousePos.y >= ExitMenuText[0].getPosition().y && mousePos.y <= ExitMenuText[0].getPosition().y + 100) { // if the y position is between the HUD button
+				std::cout << "rety Button pressed" << std::endl;
+				
 
-	//		}
-	//	}
-	//	if (mousePos.x >= ExitMenuText[1].getPosition().x && mousePos.x <= ExitMenuText[1].getPosition().x + 115) { // if the x position is on the first HUD button
-	//		if (mousePos.y >= ExitMenuText[1].getPosition().y && mousePos.y <= ExitMenuText[1].getPosition().y + 100) { // if the y position is between the HUD button
-	//			std::cout << "exit Button pressed" << std::endl;
-	//			exit(0); // exiting out 
-	//			system("Exit");
+			}
+		}
+		if (mousePos.x >= ExitMenuText[1].getPosition().x && mousePos.x <= ExitMenuText[1].getPosition().x + 115) { // if the x position is on the first HUD button
+			if (mousePos.y >= ExitMenuText[1].getPosition().y && mousePos.y <= ExitMenuText[1].getPosition().y + 100) { // if the y position is between the HUD button
+				std::cout << "exit Button pressed" << std::endl;
+				exit(0); // exiting out 
+				system("Exit");
 
-	//		}
-	//	}
-	//}
+			}
+		}
+	}
 }
 
 void GameOver::KeyHandler(sf::Keyboard::Key key) {
