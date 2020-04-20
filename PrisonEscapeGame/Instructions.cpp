@@ -47,25 +47,25 @@ void Instructions::initText()
 
 	this->InstructionsMenuText[1].setFont(font);
 	this->InstructionsMenuText[1].setCharacterSize(60);
-	this->InstructionsMenuText[1].setFillColor(sf::Color::White);
+	this->InstructionsMenuText[1].setFillColor(sf::Color::Black);
 	this->InstructionsMenuText[1].setString("Crafting");
 	this->InstructionsMenuText[1].setPosition(sf::Vector2f(50, 120)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	this->InstructionsMenuText[2].setFont(font);
 	this->InstructionsMenuText[2].setCharacterSize(60);
-	this->InstructionsMenuText[2].setFillColor(sf::Color::White);
+	this->InstructionsMenuText[2].setFillColor(sf::Color::Black);
 	this->InstructionsMenuText[2].setString("Skills");
 	this->InstructionsMenuText[2].setPosition(sf::Vector2f(50, 220)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	this->InstructionsMenuText[3].setFont(font);
 	this->InstructionsMenuText[3].setCharacterSize(60);
-	this->InstructionsMenuText[3].setFillColor(sf::Color::White);
+	this->InstructionsMenuText[3].setFillColor(sf::Color::Black);
 	this->InstructionsMenuText[3].setString("Routine");
 	this->InstructionsMenuText[3].setPosition(sf::Vector2f(50, 320)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	this->InstructionsMenuText[4].setFont(font);
 	this->InstructionsMenuText[4].setCharacterSize(60);
-	this->InstructionsMenuText[4].setFillColor(sf::Color::White);
+	this->InstructionsMenuText[4].setFillColor(sf::Color::Black);
 	this->InstructionsMenuText[4].setString("Back");
 	this->InstructionsMenuText[4].setPosition(sf::Vector2f(this->width - 160, this->height - 100)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
@@ -312,7 +312,7 @@ void Instructions::mouseHandler(sf::RenderWindow &window) {
 
 void Instructions::Up() {
 	if (this->selectedItemIndex - 1 >= 0) { // If the item index is above 0, so you cant just keep pressing up and break stuff
-		this->InstructionsMenuText[selectedItemIndex].setFillColor(sf::Color::White); //set the blue color to white
+		this->InstructionsMenuText[selectedItemIndex].setFillColor(sf::Color::Black); //set the blue color to white
 		this->selectedItemIndex--; //decrememnt the index
 		this->InstructionsMenuText[selectedItemIndex].setFillColor(sf::Color::Blue); //set the white colour to blue
 	}
@@ -320,7 +320,7 @@ void Instructions::Up() {
 
 void Instructions::Down() {
 	if (this->selectedItemIndex + 1 < Instructions_item_Number) { // If the item index is above 0, so you cant just keep pressing up and break stuff
-		this->InstructionsMenuText[selectedItemIndex].setFillColor(sf::Color::White); //set the blue color to white
+		this->InstructionsMenuText[selectedItemIndex].setFillColor(sf::Color::Black); //set the blue color to white
 		this->selectedItemIndex++; // increment the index
 		this->InstructionsMenuText[selectedItemIndex].setFillColor(sf::Color::Blue); //set the white colour to blue
 	}

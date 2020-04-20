@@ -7,8 +7,8 @@ public:
 		y = tile.y;
 	};
 
-	float x; // position x
-	float y; // position y
+	int x; // position x
+	int y; // position y
 	float g; // goal node
 	float h;
 	float f;

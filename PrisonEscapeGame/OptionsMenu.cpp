@@ -37,7 +37,7 @@ OptionsMenu::OptionsMenu()
 	OptionsMenuText[0].setCharacterSize(60);
 	OptionsMenuText[0].setFillColor(sf::Color::Blue);
 	OptionsMenuText[0].setString("Sound");
-	OptionsMenuText[0].setPosition(sf::Vector2f(130, 45)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	OptionsMenuText[0].setPosition(sf::Vector2f(120, 55)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 
 
@@ -45,7 +45,7 @@ OptionsMenu::OptionsMenu()
 	OptionsMenuText[1].setCharacterSize(60);
 	OptionsMenuText[1].setFillColor(sf::Color::White);
 	OptionsMenuText[1].setString("Music");
-	OptionsMenuText[1].setPosition(sf::Vector2f(130, 145)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	OptionsMenuText[1].setPosition(sf::Vector2f(120, 165)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 	OptionsMenuText[2].setFont(font);
 	OptionsMenuText[2].setCharacterSize(60);
@@ -58,7 +58,7 @@ OptionsMenu::OptionsMenu()
 	OptionsMenuText[3].setCharacterSize(60);
 	OptionsMenuText[3].setFillColor(sf::Color::White);
 	OptionsMenuText[3].setString("Back");
-	OptionsMenuText[3].setPosition(sf::Vector2f(40, this->height - 100)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	OptionsMenuText[3].setPosition(sf::Vector2f(40, this->height - 90)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 
 	selectedItemIndex = 0;

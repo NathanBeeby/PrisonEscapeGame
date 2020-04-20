@@ -56,7 +56,7 @@ private:
 
 	sf::SoundBuffer soundBuffer; // sound buffer
 	sf::View view; //setting the view for the scrolling screen
-	sf::Vector2i ScreenSize;
+	sf::Vector2f ScreenSize;
 	sf::Vector2f pos; // halving the screen size to set the centre of screen as the movement position
 
 	int GameState; // the beginning state for the menu system will be the start menu

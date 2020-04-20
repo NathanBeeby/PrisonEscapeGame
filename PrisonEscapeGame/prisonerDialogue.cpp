@@ -162,9 +162,9 @@ void prisonerDialogue::draw(sf::View &view, sf::RenderTarget& target) {
 	for (int i = 0; i < BoxSegment.size(); i++) {
 		target.draw(BoxSegment[i]);
 	}
-	PrisonerText[0].setPosition(view.getCenter().x, view.getCenter().y + 80); // center item for width, have the amount of string items + 1, so that they're equally spaced out
-	PrisonerText[1].setPosition(view.getCenter().x, view.getCenter().y + 140); // center item for width, have the amount of string items + 1, so that they're equally spaced out
-	PrisonerText[2].setPosition(view.getCenter().x, view.getCenter().y + 200); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	PrisonerText[0].setPosition(view.getCenter().x - 20, view.getCenter().y + 80); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	PrisonerText[1].setPosition(view.getCenter().x - 20, view.getCenter().y + 140); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	PrisonerText[2].setPosition(view.getCenter().x - 20, view.getCenter().y + 200); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 
 	for (int i = 0; i < prisoner_item_Number; i++) {
@@ -179,19 +179,19 @@ void prisonerDialogue::Talk(sf::View &view, sf::RenderTarget& target) {
 
 	std::vector<sf::Text>  talking(7, sf::Text(TalkDialogue)); // an array of 5 cell doorsa
 
-	talking[0].setString("Don't drop the soap in the shower");
-	talking[1].setString("There's going to be a breakout one of these days");
-	talking[2].setString("The chow here is inedible");
-	talking[3].setString("Man, I can't wait for visitation");
-	talking[4].setString("I used to be a baller in the free world");
-	talking[5].setString("Did I ever tell you I was a drug lord");
-	talking[6].setString("I've killed like 5 guys with my bare hands");
+	talking[0].setString("Don't drop the soap \nin the shower");
+	talking[1].setString("There's going to be a \nbreakout one of these days");
+	talking[2].setString("The chow here is \ninedible");
+	talking[3].setString("Man, I can't wait \nfor visitation");
+	talking[4].setString("I used to be a baller \nin the free world");
+	talking[5].setString("Did I ever tell you I \nwas a drug lord");
+	talking[6].setString("I've killed like 5 \nguys with my bare hands");
 
 	for (int i = 0; i < talking.size(); i++) {
 		talking[i].setFont(font);
-		talking[i].setCharacterSize(40);
+		talking[i].setCharacterSize(30);
 		talking[i].setFillColor(sf::Color(0, 0, 0));
-		talking[i].setPosition(view.getCenter().x - 170, view.getCenter().y + 90);
+		talking[i].setPosition(view.getCenter().x - 190, view.getCenter().y + 90);
 	}
 
 	if (talkInt == 0) { target.draw(talking[0]); }
@@ -347,30 +347,6 @@ void prisonerDialogue::mouseHandler(sf::RenderWindow &window, GUI &gui)
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
 		std::cout << "Clicked inside Box" << std::endl;
 
-		if (worldPos.x >= PrisonerText[0].getPosition().x && worldPos.x <= PrisonerText[0].getPosition().x + 200) {
-			if (worldPos.y >= PrisonerText[0].getPosition().y && worldPos.y <= PrisonerText[0].getPosition().y + 50) {
-				if (!mousePress) {
-					std::cout << "Talk Clicked" << std::endl;
-					this->talkPressed(gui);
-				}
-			}
-		}
-
-		if (worldPos.x >= PrisonerText[1].getPosition().x && worldPos.x <= PrisonerText[1].getPosition().x + 200) {
-			if (worldPos.y >= PrisonerText[1].getPosition().y && worldPos.y <= PrisonerText[1].getPosition().y + 50) {
-				if (!mousePress) {
-					std::cout << "Trade Clicked" << std::endl;
-					this->tradePressed(window, gui);
-				}
-			}
-		}
-
-		if (worldPos.x >= PrisonerText[2].getPosition().x && worldPos.x <= PrisonerText[2].getPosition().x + 200) {
-			if (worldPos.y >= PrisonerText[2].getPosition().y && worldPos.y <= PrisonerText[2].getPosition().y + 50) {
-				std::cout << "Missions Clicked" << std::endl;
-				this->missionsPressed(window, gui);
-			}
-		}
 		// Close Button on Talk
 		if (worldPos.x >= cancelButton.getPosition().x && worldPos.x <= cancelButton.getPosition().x + 200) {
 			if (worldPos.y >= cancelButton.getPosition().y && worldPos.y <= cancelButton.getPosition().y + 50) {
@@ -411,6 +387,34 @@ void prisonerDialogue::mouseHandler(sf::RenderWindow &window, GUI &gui)
 				}
 			}
 		}
+
+		if (worldPos.x >= PrisonerText[0].getPosition().x && worldPos.x <= PrisonerText[0].getPosition().x + 200) {
+			if (worldPos.y >= PrisonerText[0].getPosition().y && worldPos.y <= PrisonerText[0].getPosition().y + 50) {
+				if (!mousePress) {
+					std::cout << "Talk Clicked" << std::endl;
+					this->talkPressed(gui);
+				}
+			}
+		}
+
+		if (worldPos.x >= PrisonerText[1].getPosition().x && worldPos.x <= PrisonerText[1].getPosition().x + 200) {
+			if (worldPos.y >= PrisonerText[1].getPosition().y && worldPos.y <= PrisonerText[1].getPosition().y + 50) {
+				if (!mousePress) {
+					std::cout << "Trade Clicked" << std::endl;
+					this->tradePressed(window, gui);
+				}
+			}
+		}
+
+		if (worldPos.x >= PrisonerText[2].getPosition().x && worldPos.x <= PrisonerText[2].getPosition().x + 200) {
+			if (worldPos.y >= PrisonerText[2].getPosition().y && worldPos.y <= PrisonerText[2].getPosition().y + 50) {
+				if (!mousePress) {
+					std::cout << "Missions Clicked" << std::endl;
+					this->missionsPressed(window, gui);
+				}
+			}
+		}
+
 	}
 	else {
 		mousePress = false;

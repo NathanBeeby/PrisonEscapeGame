@@ -10,18 +10,16 @@ TODO -
 When issues are mitigated to the best possibility on the end of the 18th, clean up code, add things to their parent class, 
 such as dialogue, object, menumanager and character
 
-- We get a vector subscript out of range error when using the mouse handler within the GUI or dialogue options. Fix this. 
-(Suspect this is from GUI class, began happening with AI Dialogue with mouse input, then furthered when I modified the GUI)
-
  GAME CLASS
 - Fix collision distance of skill items / prisoners etc - add extra distance.
+
+
 - Fix skills not displaying from skill menu to GUI skills menu
-
-
 - Fix Inventory item texture randomizing on click and removal of item
 - Fix Inventory Items moving when character moves
 - Fix GUI showing no Inventory Item one accessed another one
 - Fix bookshelf, exercise bike and weights not giving skills
+
 
 \\\\\\\\\\\\\\\\\\\\\          MINIMUM VIABLE PRODUCT TO SEND OUT			 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 

@@ -103,7 +103,7 @@ void InventoryItems::prepare2x2Items(sf::View &view) {
 		for (int j = 0; j < 2; j++) {
 			if (inv2by2Size < InvRand2by2) {
 				Items2by2.push_back(item);
-				Items2by2[inv2by2Size].setPosition(view.getCenter().x - 55 + (i * 64), view.getCenter().y - 55 + (j * 64));
+				Items2by2[inv2by2Size].setPosition(view.getCenter().x - 64 + (i * 64), view.getCenter().y - 64 + (j * 64));
 				Items2by2[inv2by2Size].setSize(sf::Vector2f(40, 45)); // giving the item a size
 				inv2by2Size++;
 			}

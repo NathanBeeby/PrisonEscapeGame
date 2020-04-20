@@ -92,7 +92,7 @@ public:
 			{
 				if (map[i][j].x != -1 && map[i][j].y != -1)
 				{
-					MapTiles.setPosition(i * 64, j * 64); // setting I and J multiplied of the size of the tiles
+					MapTiles.setPosition((float)i * 64, (float)j * 64); // setting I and J multiplied of the size of the tiles
 					MapTiles.setTextureRect(sf::IntRect(map[i][j].x * 64, map[i][j].y * 64, 64, 64)); // getting the left, top, width and height
 					window.draw(MapTiles);
 				}

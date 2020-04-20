@@ -395,7 +395,7 @@ void GUI::MouseInput(sf::RenderWindow &window) {
 				}
 			}
 		}
-		this->mousePress = true;
+		//this->mousePress = true;
 	}
 	else {
 		mousePress = false;
@@ -411,17 +411,25 @@ void GUI::craftingMouseInput(sf::RenderWindow &window)
 
 		if (worldPos.x >= CraftButton.getPosition().x && worldPos.x <= CraftButton.getPosition().x + CraftButton.getSize().x) {
 			if (worldPos.y >= CraftButton.getPosition().y && worldPos.y <= CraftButton.getPosition().y + CraftButton.getSize().y) {
-				std::cout << "Inside craft button" << std::endl;
-				craftingOpening();
+				if (!mousePress) {
+					std::cout << "Inside craft button" << std::endl;
+					craftingOpening();
+				}
 			}
 		}
 
 		if (worldPos.x >= CraftBox.getPosition().x && worldPos.x <= CraftBox.getPosition().x + CraftBox.getSize().x) {
 			if (worldPos.y >= CraftBox.getPosition().y && worldPos.y <= CraftBox.getPosition().y + CraftBox.getSize().y) {
-				std::cout << "Inside Craft Box" << std::endl;
-				craftButtonClicked();
+				if (!mousePress) {
+					std::cout << "Inside Craft Box" << std::endl;
+					craftButtonClicked();
+				}
 			}
 		}
+		this->mousePress = true;
+	}
+	else {
+		mousePress = false;
 	}
 }
 // Public Functions

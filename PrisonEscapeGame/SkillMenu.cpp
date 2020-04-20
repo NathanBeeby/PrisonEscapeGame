@@ -306,7 +306,7 @@ void SkillMenu::drawBars(sf::RenderTarget &target) {
 	SpendPoints.setFillColor(sf::Color(255, 0, 0));
 	SpendPoints.setString("You have more \nSkillpoints to spend");
 	SpendPoints.setCharacterSize(30);
-	SpendPoints.setPosition(450, 100);
+	SpendPoints.setPosition(490, 75);
 
 	target.draw(StrBar);
 	target.draw(StaBar);

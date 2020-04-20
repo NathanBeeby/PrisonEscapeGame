@@ -21,10 +21,10 @@ void Game::initVariables()
 
 void Game::initWindow()
 {
-	this->ScreenSize = sf::Vector2i(800, 600);
+	this->ScreenSize = sf::Vector2f(800, 600);
 	this->videomode = sf::VideoMode(this->ScreenSize.x, this->ScreenSize.y);
 	this->window = new sf::RenderWindow(this->videomode, "Prison Escape!", sf::Style::Close | sf::Style::Titlebar);//setting the window
-	this->window->setFramerateLimit(60.f);
+	this->window->setFramerateLimit(60);
 	this->window->setVerticalSyncEnabled(true);// controlling the refresh rate in line with the vertical frequency of the monitor
 }
 

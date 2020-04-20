@@ -130,9 +130,9 @@ void guardDialogue::draw(sf::View &view, sf::RenderTarget& target) {
 	for (int i = 0; i < BoxSegment.size(); i++) {
 		target.draw(BoxSegment[i]);
 	}
-	GuardText[0].setPosition(view.getCenter().x, view.getCenter().y + 80); // center item for width, have the amount of string items + 1, so that they're equally spaced out
-	GuardText[1].setPosition(view.getCenter().x, view.getCenter().y + 140); // center item for width, have the amount of string items + 1, so that they're equally spaced out
-	GuardText[2].setPosition(view.getCenter().x, view.getCenter().y + 200); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	GuardText[0].setPosition(view.getCenter().x - 20, view.getCenter().y + 80); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	GuardText[1].setPosition(view.getCenter().x - 30, view.getCenter().y + 140); // center item for width, have the amount of string items + 1, so that they're equally spaced out
+	GuardText[2].setPosition(view.getCenter().x - 40, view.getCenter().y + 200); // center item for width, have the amount of string items + 1, so that they're equally spaced out
 
 
 	for (int i = 0; i < guard_item_Number; i++) {
@@ -162,19 +162,19 @@ void guardDialogue::Talk(sf::View &view, sf::RenderTarget& target) {
 
 	std::vector<sf::Text>  talking(7, sf::Text(TalkDialogue)); // a vector for the dialogue
 
-	talking[0].setString("Sometimes I hate this job. others, I really like it");
-	talking[1].setString("Hey man, I'm more ganster than you");
-	talking[2].setString("The food in chow is like 40% cardboard");
+	talking[0].setString("Sometimes I hate this job.\n others, I really like it");
+	talking[1].setString("Hey man, I'm more ganster\n than you");
+	talking[2].setString("The food in chow is\n like 40% cardboard");
 	talking[3].setString("Get out of my face.");
-	talking[4].setString("If you don't leave me alone, you're getting a charge!");
-	talking[5].setString("Your girlfriends probably out there with Jodie");
-	talking[6].setString("Protect them Junies in the shower");
+	talking[4].setString("If you don't leave me alone,\n you're getting a charge!");
+	talking[5].setString("Your girlfriends probably\n out there with Jodie");
+	talking[6].setString("Protect them Junies\n in the shower");
 
 	for (int i = 0; i < talking.size(); i++) {
 		talking[i].setFont(font);
-		talking[i].setCharacterSize(40);
+		talking[i].setCharacterSize(30);
 		talking[i].setFillColor(sf::Color(0, 0, 0));
-		talking[i].setPosition(view.getCenter().x - 170, view.getCenter().y + 90);
+		talking[i].setPosition(view.getCenter().x - 190, view.getCenter().y + 90);
 	}
 
 	if (talkInt == 0) { target.draw(talking[0]); }
@@ -331,13 +331,18 @@ void guardDialogue::mouseHandler(sf::RenderWindow &window, GUI &gui)
 	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
 	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
 
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
+		std::cout << "Clicked inside Box" << std::endl;
+
 		// Accept Mission
 		if (worldPos.x >= acceptButton.getPosition().x && worldPos.x <= acceptButton.getPosition().x + 200) {
 			if (worldPos.y >= acceptButton.getPosition().y && worldPos.y <= acceptButton.getPosition().y + 50) {
 				if (!mousePress) {
 					std::cout << "Mission Accepted:" << missionsInt << std::endl; // use this for trade functionality later, give positive rep to player for accepting
 					guardDState = guardDialogueMenu;
-					gui.missions.push_back(missions[missionsInt]);
+					//if(gui.missions.size() < 7){
+					//gui.missions.push_back(missions[missionsInt]); // Breaks on pushback
+					//}
 					dialogueCheck = false;
 				}
 			}
@@ -352,9 +357,6 @@ void guardDialogue::mouseHandler(sf::RenderWindow &window, GUI &gui)
 				}
 			}
 		}
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
-		std::cout << "Clicked inside Box" << std::endl;
-
 		if (worldPos.x >= GuardText[0].getPosition().x && worldPos.x <= GuardText[0].getPosition().x + 200) {
 			if (worldPos.y >= GuardText[0].getPosition().y && worldPos.y <= GuardText[0].getPosition().y + 50) {
 				if (!mousePress) {

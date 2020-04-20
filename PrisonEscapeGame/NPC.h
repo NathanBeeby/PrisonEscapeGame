@@ -24,13 +24,13 @@ public:
 
 	bool attacked;
 	int time, move, number, health;
+	int x, y;
 	float Speed;
 
 	sf::Vector2i anim;
 	sf::Vector2f lastVelocity;
 	sf::Vector2f vel;
 
-	float x, y;
 	float sizeX, sizeY, moveSpeed;
 	std::vector<sf::RectangleShape> sprites;
 	std::vector<sf::Texture> spriteTexture;
