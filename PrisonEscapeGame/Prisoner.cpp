@@ -119,40 +119,40 @@ const sf::FloatRect Prisoner::getBounds() const
 // Public Functions
 void Prisoner::updateStateChange(sf::Time deltaTime) {
 
-	////PrisonAnim.resize(prisoners.size());
+	//PrisonAnim.resize(prisoners.size());
 	//lastPrisonerPosition.resize(prisoners.size());
 	//vel.resize(prisoners.size());
 	//lastVelocity.resize(prisoners.size());
 
-	/*if (gui.yardTime == true) {
-	std::cout << "YardTime" << std::endl;
-	wayPoint.x = yardWaypoint.x;
-	wayPoint.y = yardWaypoint.y;
-	}
-	if (gui.chowTime == true) {
-	std::cout << "chowTime" << std::endl;
-	wayPoint.x = chowWaypoint.y;
-	wayPoint.y = chowWaypoint.y;
-	}
-	if (gui.showerTime == true) {
-	std::cout << "showerTime" << std::endl;
-	wayPoint.x = showerWaypoint.x;
-	wayPoint.y = showerWaypoint.y;
-	}
-	if (gui.workTime == true) {
-	std::cout << "workTime" << std::endl;
-	wayPoint.x = workWaypoint.x;
-	wayPoint.y = workWaypoint.y;
-	}
-	if (gui.freeTime == true) {
-	std::cout << "freeTime" << std::endl;
-	wayPoint.x = freeWaypoint.x;
-	wayPoint.y = freeWaypoint.y;
-	}
-	if (gui.bedTime == true) {
+	//if (gui.yardTime == true) {
+	//std::cout << "YardTime" << std::endl;
+	//wayPoint.x = yardWaypoint.x;
+	//wayPoint.y = yardWaypoint.y;
+	//}
+	//if (gui.chowTime == true) {
+	//std::cout << "chowTime" << std::endl;
+	//wayPoint.x = chowWaypoint.y;
+	//wayPoint.y = chowWaypoint.y;
+	//}
+	//if (gui.showerTime == true) {
+	//std::cout << "showerTime" << std::endl;
+	//wayPoint.x = showerWaypoint.x;
+	//wayPoint.y = showerWaypoint.y;
+	//}
+	//if (gui.workTime == true) {
+	//std::cout << "workTime" << std::endl;
+	//wayPoint.x = workWaypoint.x;
+	//wayPoint.y = workWaypoint.y;
+	//}
+	//if (gui.freeTime == true) {
+	//std::cout << "freeTime" << std::endl;
+	//wayPoint.x = freeWaypoint.x;
+	//wayPoint.y = freeWaypoint.y;
+	//}
+	//if (gui.bedTime == true) {
 
-	}
-	*/
+	//}
+	
 	if (PState == IDLE) { // if the prisoner state is idle, the prisoners will wander by calling the wandering function
 		Wandering();
 		//	std::cout << "Prisoner State == Wandering" << std::endl;

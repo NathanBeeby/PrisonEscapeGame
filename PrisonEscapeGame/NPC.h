@@ -9,10 +9,11 @@
 class NPC : public Character
 {
 private:
+	// Private Variables
 	int spriteMovement;
 
+	// Initialization
 	void initVariables();
-
 public:
 	// Constructor / Destructor
 	NPC();
@@ -42,19 +43,9 @@ public:
 	std::string s;
 	std::string path;
 
-	// Public functions
-	//void move(float xa, float ya) {
-	//	x += xa;
-	//	y += ya;
-	//}
 
-	// Virtual public functions
-	//virtual void runAway(sf::Vector2f position) = 0;
-	//virtual void chasePlayer(sf::Vector2f position) = 0;
 	void CollisionResponse();
 	void Move(const float dirX, const float dirY);
 	void moveIdle(sf::RectangleShape sprite, float speed);
-	//virtual void walkToTask(sf::Vector2f position) = 0;
-
 };
 

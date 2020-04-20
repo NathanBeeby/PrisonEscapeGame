@@ -94,7 +94,7 @@ SkillMenu::~SkillMenu()
 
 
 void SkillMenu::keyHandler(sf::Keyboard::Key key) {
-
+	std::cout << "Player Str: " << player.getStrength() << std::endl;
 	if (key == sf::Keyboard::Up) {
 		Up();
 		std::cout << "Up Pressed" << std::endl;

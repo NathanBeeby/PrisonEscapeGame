@@ -3,11 +3,10 @@
 #define Options_item_Number 4
 
 
-class OptionsMenu
+class OptionsMenu : virtual public MenuManager
 {
 private:
 	// Variables
-	sf::Font font;
 	sf::RectangleShape emptyMusic, emptySound, MusicBar, SoundBar, optionsBackground;
 	sf::Texture optionsBackgroundTexture;
 	sf::Text OptionsMenuText[Options_item_Number];

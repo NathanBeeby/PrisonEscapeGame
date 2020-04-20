@@ -1,11 +1,10 @@
 #pragma once
 #include "MenuManager.h"
 #define GameOver_Number 2
-class GameOver // implementing this as a menu instead of an interface as I may want to add an SFML plug in for animation for the end game and parts of the game
+class GameOver : virtual public MenuManager // implementing this as a menu instead of an interface as I may want to add an SFML plug in for animation for the end game and parts of the game
 {
 private:
 	// Variables
-	sf::Font font;
 	sf::RectangleShape BackgroundShape;
 	sf::Text ExitMenuText[GameOver_Number];
 	sf::Text gameOverMessage;

@@ -6,27 +6,18 @@ TODO -
 
 \\\\\\\\\\\\\\\\\\\\\          MINIMUM VIABLE PRODUCT TO SEND OUT			 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-
-When issues are mitigated to the best possibility on the end of the 18th, clean up code, add things to their parent class, 
-such as dialogue, object, menumanager and character
-
- GAME CLASS
-- Fix collision distance of skill items / prisoners etc - add extra distance.
-
-
-- Fix skills not displaying from skill menu to GUI skills menu
-- Fix Inventory item texture randomizing on click and removal of item
-- Fix Inventory Items moving when character moves
-- Fix GUI showing no Inventory Item one accessed another one
-- Fix bookshelf, exercise bike and weights not giving skills
-
+- FIX SKILLS MENU NOT DISPLAYING SKILLS TO GUI
+- FIX INVENTORY ITEMS NOT FOLLOWING THEIR CONTAINER
+- FIX RANDOMIZATION OF INVENTORY ITEMS
+- FIX PRISONERS AND GUARDS NOT ATTACKING ONCE ATTACKED
+- FIX VECTOR OUT OF RANGE ISSUE WHEN CLICKING ITEMS IN BIN
 
 \\\\\\\\\\\\\\\\\\\\\          MINIMUM VIABLE PRODUCT TO SEND OUT			 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
 
 
-\\\\\\\\\\\\\\\\\\\\\		   Implementations		 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+\\\\\\\\\\\\\\\\\\\\\		   Things to be Implemented		 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 - Add NPC AI path finding
 - Add AI Idle moving
@@ -40,9 +31,9 @@ such as dialogue, object, menumanager and character
 - watch SFML crafting tutorial video
 - Clean Up Code
 
-\\\\\\\\\\\\\\\\\\\\\		   Implementations		 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+\\\\\\\\\\\\\\\\\\\\\		   Things to be Implemented		 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-- Implement movement for AI within NPC code
+- Implement NPC movement within NPC class and call it in the classes for guard, prisoner, warden and nurse
 
 - Implement better crafting and removing objects when clicked upon in inventory
 

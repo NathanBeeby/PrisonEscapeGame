@@ -3,10 +3,9 @@
 #include "MenuManager.h"
 #define skill_item_Number 7
 
-class SkillMenu
+class SkillMenu : virtual public MenuManager
 {
 private:
-	sf::Font font;
 	sf::Text SpendPoints;
 	sf::RectangleShape StrBar, StaBar, EnduranceBar, ChaBar, KnoBar, skillsBackground;
 	sf::RectangleShape Str, Sta, Endurance, Cha, Kno;

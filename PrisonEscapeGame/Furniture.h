@@ -12,14 +12,11 @@ private:
 	// Variables
 	std::vector<sf::Texture> FurnitureTexture;
 	std::ifstream myInputFile;
-	std::stringstream fss;
-	std::string fs;
 	std::string furniturefilename;
 	std::string furniturePath;
 	std::string furnitureFile;
 
 	int  furnitureNumber;
-	float furnX, furnY, sizeX, sizeY; // position X and Y
 
 									  // Initialization
 	void initVariables();

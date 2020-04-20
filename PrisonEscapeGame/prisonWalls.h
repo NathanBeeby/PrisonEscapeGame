@@ -7,14 +7,11 @@ private:
 	//Variables
 	std::ifstream myInputFile;
 	std::string filename;
-	std::stringstream ss;
-	std::string s;
 	std::string wallFile;
 	sf::RectangleShape wallBlock;
 	sf::Texture wallTexture;
 	sf::Vector2i pos;
 
-	float x, y;
 	int numWallsToRead;
 
 	// Initialization

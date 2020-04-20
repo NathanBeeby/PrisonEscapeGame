@@ -11,7 +11,15 @@ class Object
 private:
 
 public:
+	// Constructor / Destructor
 	Object();
 	virtual ~Object();
+
+	// Public Variables
+	std::stringstream ss;
+	std::string s;
+	float sizeX, sizeY, rot, x, y;
+
+
 };
 

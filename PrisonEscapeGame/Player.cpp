@@ -8,22 +8,21 @@ void Player::initVariables()
 	this->InvOpenCount = 0;
 	this->SkilOpenCount = 0;
 	this->moveSpeed = 20;
-	this->playerDamage = 5;// making the player damage a third of the hud player strength (?/100) + the initial player damage (1)
+	this->damage = 5;// making the player damage a third of the hud player strength (?/100) + the initial player damage (1)
 	this->CharAnim.x = 1;
 	this->Health = 100;
 	this->playerSize.x = 32;
 	this->playerSize.y = 32;
 	this->playerPosition.x = 150;
 	this->playerPosition.y = 150;
-	this->playerStrength = 0; // the stat number that will affect the skills bar
-	this->playerStamina = 0;
-	this->playerArmour = 0;
-	this->playerCharisma = 0;
-	this->playerKnowledge = 0;
-	this->playerLevel = 1;
+	this->strength = 0; // the stat number that will affect the skills bar
+	this->stamina = 0;
+	this->armour = 0;
+	this->charisma = 0;
+	this->knowledge = 0;
+	this->level = 1;
 	this->lastPosition = Down;
 	this->CharAnim.y = Down;
-	std::cout << "Player Initialized" << std::endl;
 }
 
 void Player::initSprite()
@@ -60,14 +59,14 @@ void Player::playerKeyboardMovement(sf::Keyboard::Key key, sf::Time deltaTime) {
 
 	if (key == sf::Keyboard::Up || key == sf::Keyboard::W)
 	{
-		vel.y -= (moveSpeed + (playerStamina)* deltaTime.asSeconds());
+		vel.y -= (moveSpeed + (this->stamina) * deltaTime.asSeconds());
 		CharAnim.y = Up;
 		lastPosition = Up;
 
 	}
 	else if (key == sf::Keyboard::Down || key == sf::Keyboard::S)
 	{
-		vel.y += (moveSpeed + (playerStamina)* deltaTime.asSeconds());
+		vel.y += (moveSpeed + (this->stamina)* deltaTime.asSeconds());
 		CharAnim.y = Down;
 		lastPosition = Down;
 
@@ -75,14 +74,14 @@ void Player::playerKeyboardMovement(sf::Keyboard::Key key, sf::Time deltaTime) {
 
 	if (key == sf::Keyboard::Left || key == sf::Keyboard::A)
 	{
-		vel.x -= (moveSpeed + (playerStamina)* deltaTime.asSeconds());
+		vel.x -= (moveSpeed + (this->stamina)* deltaTime.asSeconds());
 		CharAnim.y = Left;
 		lastPosition = Left;
 
 	}
 	if (key == sf::Keyboard::Right || key == sf::Keyboard::D)
 	{
-		vel.x += (moveSpeed + (playerStamina)* deltaTime.asSeconds());
+		vel.x += (moveSpeed + (this->stamina)* deltaTime.asSeconds());
 		CharAnim.y = Right;
 		lastPosition = Right;
 
@@ -154,133 +153,6 @@ const sf::Vector2f & Player::getSize() const
 const sf::FloatRect Player::getBounds() const
 {
 	return this->sprite.getGlobalBounds();
-}
-
-const int& Player::getHealth() const
-{
-	return this->Health;
-}
-
-const int Player::getMaxHealth() const
-{
-	return this->HealthMax;
-}
-
-const int Player::getStrength() const
-{
-	return this->playerStrength;
-}
-
-const int Player::getStamina() const
-{
-	std::cout << "player Stamina is now: " << this->playerStamina << std::endl;
-	return this->playerStamina;
-}
-
-const int Player::getArmour() const
-{
-	return this->playerArmour;
-}
-
-const int Player::getCharisma() const
-{
-	return this->playerCharisma;
-}
-
-const int Player::getKnowledge() const
-{
-	return playerKnowledge;
-}
-
-const int Player::getDamage() const
-{
-	return this->playerDamage;
-}
-
-const int Player::getLevel() const
-{
-	return this->playerLevel;
-}
-
-void Player::removeHP(const int value)
-{
-	this->Health -= value;
-}
-
-void Player::setHP(const int HP)
-{
-	this->Health = HP;
-}
-
-void Player::addStrength(const int str)
-{
-	this->playerStrength += str;
-}
-
-void Player::removeStrength(const int str)
-{
-	this->playerStrength -= str;
-}
-
-void Player::addStamina(const int sta)
-{
-	this->playerStamina += sta;
-	std::cout << "player Stamina: " << this->playerStamina << std::endl;
-}
-
-void Player::removeStamina(const int sta)
-{
-	this->playerStamina -= sta;
-}
-
-void Player::addArmour(const int arm)
-{
-	this->playerArmour += arm;
-}
-
-void Player::removeArmour(const int arm)
-{
-	this->playerArmour -= arm;
-}
-
-void Player::addCharisma(const int cha)
-{
-	this->playerCharisma += cha;
-}
-
-void Player::removeCharisma(const int cha)
-{
-	this->playerCharisma -= cha;
-}
-
-void Player::addKnowledge(const int kno)
-{
-	this->playerKnowledge += kno;
-}
-
-void Player::removeKnowledge(const int kno)
-{
-	this->playerKnowledge -= kno;
-}
-
-void Player::addDamage(const int dmg)
-{
-	this->playerDamage += dmg;
-}
-
-void Player::removeDamage(const int dmg)
-{
-	this->playerDamage -= dmg;
-}
-
-void Player::addLevel(const int lvl)
-{
-	this->playerLevel += lvl;
-}
-
-void Player::setLevel(const int lvl)
-{
-	this->playerLevel = lvl;
 }
 
 void Player::CollisionResponse()

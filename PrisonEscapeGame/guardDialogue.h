@@ -1,8 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include "Dialogue.h"
-#include "GUI.h"
 
 #define guard_item_Number 3
 class guardDialogue : virtual public Dialogue
@@ -11,20 +9,15 @@ private:
 	// Variables
 	enum guardDialogueState { guardTalk, guardMissions, snitching, guardDialogueMenu, guardNoState };
 	
-	std::vector<bool> acceptedMission;
 	std::vector <std::string> GM;
-	std::vector<sf::Text>  missions;
 
-
-	sf::Font font;
 	sf::Text GuardText[guard_item_Number];
-	sf::Text TalkDialogue, missionDialogue, repText;
+	sf::Text repText;
 	sf::Texture acceptTexture, declineTexture, cancelTexture;
 	sf::RectangleShape acceptButton, declineButton, cancelButton, segBox, DialogueBox;
 
-	int talkInt, missionsInt, offset, guardItemIndex;
+	int guardItemIndex;
 	int GetPressedItem() { return guardItemIndex; }
-	bool mousePress;
 	//Initialization
 	void initVariables();
 	void initSprites();
@@ -38,9 +31,8 @@ public:
 	virtual ~guardDialogue();
 
 	// Public Variables
-	bool dialogueCheck;
-	int prisonInfo; // int for number of information collected on prisoner
 
+	int prisonInfo; // int for number of information collected on prisoner
 	guardDialogueState guardDState;
 
 	// Public Functions

@@ -38,44 +38,39 @@ void SkillItems::initSkills()
 	if (myInputFile.is_open())
 	{
 		//read the first line which has the number of elements
-		std::getline(myInputFile, Ss);
-		Sss.str(Ss);
-		Sss.ignore(22);
-		Sss >> skillItemNumber;
+		std::getline(myInputFile, s);
+		ss.str(s);
+		ss.ignore(22);
+		ss >> skillItemNumber;
 		skillItems.resize(skillItemNumber);
 		SkillItemTexture.resize(skillItemNumber);
 
-		Sss.clear();
-
-
-		float sizeX, sizeY;
-		float rot; // rotation
-
+		ss.clear();
 
 		for (int i = 0; i < skillItemNumber; i++)
 		{
 
 			//NAME AND NUMBER
-			getline(myInputFile, Ss);
-			Sss.clear();
-			Sss.str(Ss);
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
 			//POSITION
-			getline(myInputFile, Ss);
-			Sss.clear();
-			Sss.str(Ss);
-			Sss >> skillItemX >> skillItemY;
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
+			ss >> x >> y;
 			//SIZE
-			getline(myInputFile, Ss);
-			Sss.clear();
-			Sss.str(Ss);
-			Sss >> sizeX >> sizeY;
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
+			ss >> sizeX >> sizeY;
 			//TEXTURE
-			getline(myInputFile, Ss);
-			Sss.clear();
-			Sss.str(Ss);
-			Sss >> skillItemPath;
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
+			ss >> skillItemPath;
 
-			sf::Vector2i pos(skillItemX, skillItemY);
+			sf::Vector2i pos(x, y);
 			sf::Vector2f size(sizeX, sizeY);
 
 

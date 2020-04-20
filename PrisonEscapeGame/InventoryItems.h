@@ -48,6 +48,8 @@ public:
 	void draw2x2Items(sf::View &view, sf::RenderWindow &window, GUI &gui);
 	void draw5x2Items(sf::View &view, sf::RenderWindow &window, GUI &gui);
 	void draw4x4Items(sf::View &view, sf::RenderWindow &window, GUI &gui);
+	void mouseHandler(sf::RenderWindow &window, GUI &gui);
+
 
 	void update(sf::Time deltaTime);
 	void render(sf::RenderTarget& target);

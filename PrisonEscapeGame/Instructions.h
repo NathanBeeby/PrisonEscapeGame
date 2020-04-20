@@ -2,11 +2,11 @@
 #include "MenuManager.h"
 #define Instructions_item_Number 6
 enum InstructionsState { noState, keysState, craftState, skillState, routineState };
-class Instructions
+class Instructions : virtual public MenuManager
 {
 private:
 	// Variables 
-	sf::Font font, keyFont;
+	sf::Font keyFont;
 	sf::Text InstructionsMenuText[Instructions_item_Number];
 	sf::Texture keysTexture, rotuineTexture, instructionsBackgroundTexture;
 	sf::RectangleShape keyBox, routinesBox, instructionsBackground;

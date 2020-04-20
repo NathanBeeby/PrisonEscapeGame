@@ -2,11 +2,10 @@
 #include "MenuManager.h"
 #define item_Number 3
 
-class Menu
+class Menu : virtual public MenuManager
 {
 private:
 	// Variables
-	sf::Font font;
 	sf::RectangleShape background, background2;
 	sf::Texture backgroundTexture, backgroundTexture2;
 	sf::Text MenuText[item_Number];

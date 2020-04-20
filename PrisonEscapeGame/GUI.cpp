@@ -53,7 +53,7 @@ void GUI::initTextures()
 		std::cout << "Load fail Error on HUDFont" << std::endl;
 		system("pause");
 	}
-	if (!this->playerTexture.loadFromFile("../assets/image_assets/sprite_image.png")) {
+	if (!this->playerTexture.loadFromFile("../assets/image_assets/HUD_Sprite.png")) {
 		std::cout << "Load fail Error on playerFaceTexture" << std::endl;
 		system("pause");
 
@@ -191,7 +191,7 @@ void GUI::initSprites()
 
 	PlayerIcon.setRadius(35);
 
-	PlayerIcon.setTextureRect(sf::IntRect(0, 0, 50, 100));
+	PlayerIcon.setTextureRect(sf::IntRect(0, 0, 32, 32));
 	PlayerIcon.setOutlineThickness(1);
 	PlayerIcon.setOutlineColor(sf::Color(0, 0, 0, HUDopacity));
 
@@ -440,11 +440,11 @@ void GUI::skillsOpening() {
 		if ((SkilOpen = true) && SkilOpenCount >= 2) { // if the misOpenCount is 2, return the value back to 0, and turn the missions open screen to false, to stop drawing
 			std::cout << "skills Closed" << std::endl;
 			SkilOpenCount = 0;
-			SkilOpen = false; // shutting the Missions screen down
+			SkilOpen = false; // shutting the skills screen down
 		}
 		else {
 			std::cout << "skills Open" << std::endl;
-			SkilOpen = true; // opening missions screen, drawing it to screen
+			SkilOpen = true; // opening skills screen, drawing it to screen
 		}
 	}
 }
@@ -713,12 +713,13 @@ void GUI::drawGUI(sf::View &view, sf::RenderTarget& target) {
 
 	if (healthBar >= 110) {
 		PlayerIcon.setTexture(&playerTexture);
+		characterBox.setTexture(&characterTexture);
 	}
 	else if (healthBar >= 40 && healthBar <= 110) {
-		PlayerIcon.setTexture(&halfHealthPlayer);
+		characterBox.setTexture(&halfHealthPlayer);
 	}
 	else {
-		PlayerIcon.setTexture(&lowHealthPlayer);
+		characterBox.setTexture(&lowHealthPlayer);
 	}
 	ArmourAddition.setSize(sf::Vector2f((this->player.getArmour() * 2), 20));
 

@@ -5,8 +5,8 @@ void Furniture::initVariables()
 {
 	this->furnitureFile = "../assets/text_assets/Furniture.txt";
 	this->furniturefilename = "file.txt";
-	this->sizeX = 0;
-	this->sizeY = 0;
+	this->x = 0;
+	this->y = 0;
 }
 
 void Furniture::initFurniture()
@@ -15,15 +15,15 @@ void Furniture::initFurniture()
 	if (this->myInputFile.is_open())
 	{
 		//read the first line which has the number of elements
-		std::getline(this->myInputFile, fs);
-		fss.str(fs);
-		fss.ignore(21);
-		fss >> furnitureNumber;
+		std::getline(this->myInputFile, s);
+		ss.str(s);
+		ss.ignore(21);
+		ss >> furnitureNumber;
 
 		furniture.resize(furnitureNumber);
 		FurnitureTexture.resize(furnitureNumber);
 
-		fss.clear();
+		ss.clear();
 
 		for (int i = 0; i < furnitureNumber; i++)
 		{
@@ -31,27 +31,27 @@ void Furniture::initFurniture()
 			//POSITION
 			//SIZE
 			//TEXTURE
-			getline(myInputFile, fs);
-			fss.clear();
-			fss.str(fs);
-			getline(myInputFile, fs);
-			fss.clear();
-			fss.str(fs);
-			fss >> furnX >> furnY;
-			getline(myInputFile, fs);
-			fss.clear();
-			fss.str(fs);
-			fss >> sizeX >> sizeY;
-			getline(myInputFile, fs);
-			fss.clear();
-			fss.str(fs);
-			fss >> furniturePath;
-			fss.clear();
-			fss.str(fs);
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
+			ss >> x >> y;
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
+			ss >> sizeX >> sizeY;
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
+			ss >> furniturePath;
+			ss.clear();
+			ss.str(s);
 
 
 
-			sf::Vector2i pos(furnX, furnY);
+			sf::Vector2i pos(x, y);
 
 			sf::Vector2f size(sizeX, sizeY);
 

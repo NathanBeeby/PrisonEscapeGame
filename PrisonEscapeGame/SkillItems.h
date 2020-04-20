@@ -11,8 +11,6 @@ private:
 
 	sf::RectangleShape bikeWindow, strengthWindow, knowledgeWindow;
 	std::vector<sf::Texture>  SkillItemTexture;
-	std::stringstream Sss;
-	std::string Ss;
 	std::string skillItemPath;
 	std::string bikeStr;
 	std::string weightsStr;
@@ -21,7 +19,6 @@ private:
 	std::ifstream myInputFile;
 
 	int skillItemNumber;
-	float skillItemX, skillItemY; // position X and Y
 
 								  // Initialization
 	void initVariables();

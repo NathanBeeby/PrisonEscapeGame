@@ -111,31 +111,22 @@ void InventoryItems::prepare2x2Items(sf::View &view) {
 	}
 }
 
-void InventoryItems::draw2x2Items(sf::View &view, sf::RenderWindow &window, GUI &gui) {
-	prepare2x2Items(view);
-
-	for (int i = 0; i < Items2by2.size(); i++) {
-		Items2by2[i].setTexture(&inventoryTexture[ItemRand2x2[i]]); // getting a random texture
-		window.draw(Items2by2[i]);
+void InventoryItems::prepare4x4Items(sf::View &view) {
+	if (inv4by4Empty == true) {
+		InvRand4by4 = rand() % 16 + 1; // randomizing InvRand2by2 to get a number between 1 and 4
+		ItemRand4x4.resize(InvRand4by4);
+		for (int i = 0; i < InvRand4by4; i++) {
+			ItemRand4x4[i] = rand() % 15 + 1; // ItemRand2by2 will have a texture for each number
+		}
+		inv4by4Empty = false; //stopping the randomization
 	}
-	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
-															// convert it to world coordinates
-	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
-		std::cout << "WorldPos X: " << worldPos.x << ", Y: " << worldPos.y << std::endl;
-		for (int i = 0; i < Items2by2.size(); i++) {
-			if (worldPos.x >= Items2by2[i].getPosition().x && worldPos.x <= Items2by2[i].getPosition().x + Items2by2[i].getSize().x) {
-				if (worldPos.y >= Items2by2[i].getPosition().y && worldPos.y <= Items2by2[i].getPosition().y + Items2by2[i].getSize().y) {
 
-					std::cout << "This is Item: " << i << std::endl; // use this method to get the item to inventory
-					if (gui.EmptySlot.size() < 8) {
-						gui.EmptySlot.push_back(Items2by2[i]); // sending the item to the player inventory
-						gui.EmptyTexture.push_back(inventoryTexture[ItemRand2x2[i]]);
-						this->inventoryTexture.erase(inventoryTexture.begin() + i);
-						this->Items2by2.erase(Items2by2.begin() + i); // erasing the selected Item from the array	
-																	  // This removes the item within the array, however swaps texture with another item in the array
-					}
-				}
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (inv4by4Size < InvRand4by4) {
+				Items4by4.push_back(item);
+				Items4by4[inv4by4Size].setPosition(view.getCenter().x - 120 + (i * 64), view.getCenter().y - 119 + (j * 64));
+				inv4by4Size++;
 			}
 		}
 	}
@@ -162,25 +153,26 @@ void InventoryItems::prepare5x2Items(sf::View &view) {
 	}
 }
 
-void InventoryItems::prepare4x4Items(sf::View &view) {
-	if (inv4by4Empty == true) {
-		InvRand4by4 = rand() % 16 + 1; // randomizing InvRand2by2 to get a number between 1 and 4
-		ItemRand4x4.resize(InvRand4by4);
-		for (int i = 0; i < InvRand4by4; i++) {
-			ItemRand4x4[i] = rand() % 15 + 1; // ItemRand2by2 will have a texture for each number
-		}
-		inv4by4Empty = false; //stopping the randomization
-	}
+void InventoryItems::draw2x2Items(sf::View &view, sf::RenderWindow &window, GUI &gui) {
+	prepare2x2Items(view);
 
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			if (inv4by4Size < InvRand4by4) {
-				Items4by4.push_back(item);
-				Items4by4[inv4by4Size].setPosition(view.getCenter().x - 120 + (i * 64), view.getCenter().y - 119 + (j * 64));
-				inv4by4Size++;
-			}
-		}
+	for (int i = 0; i < Items2by2.size(); i++) {
+		Items2by2[i].setTexture(&inventoryTexture[ItemRand2x2[i]]); // getting a random texture
+		window.draw(Items2by2[i]);
 	}
+	mouseHandler(window, gui);
+}
+
+void InventoryItems::draw4x4Items(sf::View &view, sf::RenderWindow &window, GUI &gui) {
+	prepare4x4Items(view);
+
+
+	for (int i = 0; i < Items4by4.size(); i++) {
+		Items4by4[i].setSize(sf::Vector2f(40, 45)); // giving the item a size
+		Items4by4[i].setTexture(&inventoryTexture[ItemRand4x4[i]]); // getting a random texture
+		window.draw(Items4by4[i]);
+	}
+	mouseHandler(window, gui);
 }
 
 void InventoryItems::draw5x2Items(sf::View &view, sf::RenderWindow &window, GUI &gui) {
@@ -188,7 +180,57 @@ void InventoryItems::draw5x2Items(sf::View &view, sf::RenderWindow &window, GUI 
 
 	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window	
 	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos); // convert it to world coordinates
+
+	for (int i = 0; i < Items5by2.size(); i++) {
+		Items5by2[i].setSize(sf::Vector2f(40, 45)); // giving the item a size
+		Items5by2[i].setTexture(&inventoryTexture[ItemRand5x2[i]]); // getting a random texture
+		window.draw(Items5by2[i]);
+	}
+
+	mouseHandler(window, gui);
+}
+
+void InventoryItems::mouseHandler(sf::RenderWindow & window, GUI & gui)
+{
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
+															// convert it to world coordinates
+	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
+		
+		// 2 x 2 items
+		for (int i = 0; i < Items2by2.size(); i++) {
+			if (worldPos.x >= Items2by2[i].getPosition().x && worldPos.x <= Items2by2[i].getPosition().x + Items2by2[i].getSize().x) {
+				if (worldPos.y >= Items2by2[i].getPosition().y && worldPos.y <= Items2by2[i].getPosition().y + Items2by2[i].getSize().y) {
+
+					std::cout << "This is Item: " << i << std::endl; // use this method to get the item to inventory
+					if (gui.EmptySlot.size() < 8) {
+						gui.EmptySlot.push_back(Items2by2[i]); // sending the item to the player inventory
+						gui.EmptyTexture.push_back(inventoryTexture[ItemRand2x2[i]]);
+						this->inventoryTexture.erase(inventoryTexture.begin() + i);
+						this->Items2by2.erase(Items2by2.begin() + i); // erasing the selected Item from the array	
+																	  // This removes the item within the array, however swaps texture with another item in the array
+					}
+				}
+			}
+		}
+
+		// 4 x 4 items
+		for (int i = 0; i < Items4by4.size(); i++) {
+			if (worldPos.x >= Items4by4[i].getPosition().x && worldPos.x <= Items4by4[i].getPosition().x + Items4by4[i].getSize().x) {
+				if (worldPos.y >= Items4by4[i].getPosition().y && worldPos.y <= Items4by4[i].getPosition().y + Items4by4[i].getSize().y) {
+					std::cout << "This is Item: " << i << std::endl; // use this method to get the item to inventory
+					if (gui.EmptySlot.size() < 8) {
+						gui.EmptySlot.push_back(Items4by4[i]); // sending the item to the player inventory
+						gui.EmptyTexture.push_back(inventoryTexture[ItemRand4x4[i]]);
+
+						this->inventoryTexture.erase(inventoryTexture.begin() + i);
+						this->Items4by4.erase(Items4by4.begin() + i); // erasing the selected Item from the array
+					}
+				}
+			}
+		}
+
+		// 5 X 2 items
 		for (int i = 0; i < Items5by2.size(); i++) {
 			if (worldPos.x >= Items5by2[i].getPosition().x && worldPos.x <= Items5by2[i].getPosition().x + Items5by2[i].getSize().x) {
 				if (worldPos.y >= Items5by2[i].getPosition().y && worldPos.y <= Items5by2[i].getPosition().y + Items5by2[i].getSize().y) {
@@ -204,42 +246,8 @@ void InventoryItems::draw5x2Items(sf::View &view, sf::RenderWindow &window, GUI 
 			}
 		}
 	}
-	for (int i = 0; i < Items5by2.size(); i++) {
-		Items5by2[i].setSize(sf::Vector2f(40, 45)); // giving the item a size
-		Items5by2[i].setTexture(&inventoryTexture[ItemRand5x2[i]]); // getting a random texture
-		window.draw(Items5by2[i]);
-	}
 }
 
-void InventoryItems::draw4x4Items(sf::View &view, sf::RenderWindow &window, GUI &gui) {
-	prepare4x4Items(view);
-
-	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
-															// convert it to world coordinates
-	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
-		for (int i = 0; i < Items5by2.size(); i++) {
-			if (worldPos.x >= Items4by4[i].getPosition().x && worldPos.x <= Items4by4[i].getPosition().x + Items4by4[i].getSize().x) {
-				if (worldPos.y >= Items4by4[i].getPosition().y && worldPos.y <= Items4by4[i].getPosition().y + Items4by4[i].getSize().y) {
-					std::cout << "This is Item: " << i << std::endl; // use this method to get the item to inventory
-					if (gui.EmptySlot.size() < 8) {
-						gui.EmptySlot.push_back(Items4by4[i]); // sending the item to the player inventory
-						gui.EmptyTexture.push_back(inventoryTexture[ItemRand4x4[i]]);
-
-						this->inventoryTexture.erase(inventoryTexture.begin() + i);
-						this->Items4by4.erase(Items4by4.begin() + i); // erasing the selected Item from the array
-					}
-				}
-			}
-		}
-	}
-
-	for (int i = 0; i < Items4by4.size(); i++) {
-		Items4by4[i].setSize(sf::Vector2f(40, 45)); // giving the item a size
-		Items4by4[i].setTexture(&inventoryTexture[ItemRand4x4[i]]); // getting a random texture
-		window.draw(Items4by4[i]);
-	}
-}
 
 void InventoryItems::update(sf::Time deltaTime)
 {

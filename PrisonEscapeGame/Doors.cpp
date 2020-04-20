@@ -16,14 +16,14 @@ void Doors::initDoors()
 	if (myInputFile.is_open())
 	{
 		//read the first line which has the number of elements
-		std::getline(this->myInputFile, ds);
-		this->dss.str(ds);
-		this->dss.ignore(21);
-		this->dss >> doorsNumber;
+		std::getline(this->myInputFile, s);
+		this->ss.str(s);
+		this->ss.ignore(21);
+		this->ss >> doorsNumber;
 		this->doors.resize(doorsNumber);
 		this->DoorTexture.resize(doorsNumber);
 
-		this->dss.clear();
+		this->ss.clear();
 
 		for (int i = 0; i < this->doorsNumber; i++)
 		{
@@ -32,27 +32,27 @@ void Doors::initDoors()
 			//SIZE
 			//ROTATION
 			//TEXTURE
-			getline(myInputFile, ds);
-			dss.clear();
-			dss.str(ds);
-			getline(myInputFile, ds);
-			dss.clear();
-			dss.str(ds);
-			dss >> doorX >> doorY;
-			getline(myInputFile, ds);
-			dss.clear();
-			dss.str(ds);
-			dss >> sizeX >> sizeY;
-			getline(myInputFile, ds);
-			dss.clear();
-			dss.str(ds);
-			dss >> rot;
-			getline(myInputFile, ds);
-			dss.clear();
-			dss.str(ds);
-			dss >> doorsPath;
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
+			ss >> x >> y;
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
+			ss >> sizeX >> sizeY;
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
+			ss >> rot;
+			getline(myInputFile, s);
+			ss.clear();
+			ss.str(s);
+			ss >> doorsPath;
 
-			sf::Vector2i pos(doorX, doorY);
+			sf::Vector2i pos(x, y);
 			sf::Vector2f size(sizeX, sizeY);
 
 
