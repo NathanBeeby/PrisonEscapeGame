@@ -90,9 +90,6 @@
     <ClCompile Include="furnitureInv.cpp">
       <Filter>Source Files\HUDItems\HUD%27s</Filter>
     </ClCompile>
-    <ClCompile Include="HUD.cpp">
-      <Filter>Source Files\HUDItems\HUD%27s</Filter>
-    </ClCompile>
     <ClCompile Include="InventoryItems.cpp">
       <Filter>Source Files\HUDItems\HUD%27s</Filter>
     </ClCompile>
@@ -113,12 +110,6 @@
     </ClCompile>
     <ClCompile Include="MenuManager.cpp">
       <Filter>Source Files\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Dialogue.cpp">
-      <Filter>Source Files\HUDItems\Dialogue</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

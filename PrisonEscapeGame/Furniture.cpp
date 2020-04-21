@@ -1,5 +1,6 @@
 #include "Furniture.h"
 
+#pragma region Initialization
 // Initialization
 void Furniture::initVariables()
 {
@@ -67,7 +68,9 @@ void Furniture::initFurniture()
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 //Constructor / Destructor
 Furniture::Furniture()
 {
@@ -79,7 +82,9 @@ Furniture::~Furniture()
 {
 
 }
+#pragma endregion
 
+#pragma region Accessors
 // accessors 
 const sf::FloatRect Furniture::getBounds() const
 {
@@ -87,7 +92,9 @@ const sf::FloatRect Furniture::getBounds() const
 		return this->furniture[i].getGlobalBounds();
 	}
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public Functions
 void Furniture::update(sf::Time deltaTime)
 {
@@ -100,4 +107,4 @@ void Furniture::render(sf::RenderTarget& target)
 		target.draw(furniture[i]);
 	}
 }
-
+#pragma endregion

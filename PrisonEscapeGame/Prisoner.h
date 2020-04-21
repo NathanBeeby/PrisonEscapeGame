@@ -1,14 +1,15 @@
 #pragma once
-
+#ifndef PRISONER_H
+#define PRISONER_H
 #include "NPC.h"
 
 class Prisoner : virtual public NPC
 {
 private:
-	// Variables
+#pragma region Private Variables
+	// Private Variables
 	enum prisonerState { IDLE, PathFollow, prisonerAngry, deadState }; // moving idly, walking to destination, and chasing the player
 																	   //enum PrisonerDir { Down, Right, Up, Left, Idle };
-
 	sf::Vector2i wayPoint;
 	sf::Vector2i chowWaypoint; // chow time
 	sf::Vector2i workWaypoint; // work time
@@ -24,16 +25,22 @@ private:
 	int prisonChoice, prisonRand, PrisonNumAngry; // the prisoner thats going to be moved
 
 	Player player;
+#pragma endregion
 
+#pragma region Initialization
 	// Initialization
 	void initVariables();
 	void initTextures();
 	void initSprite();
+#pragma endregion
 public:
+#pragma region Constructor / Destructor
 	//Constructor / Destructor
 	Prisoner();
 	virtual ~Prisoner();
+#pragma endregion
 
+#pragma region Public Variables
 	// Public Variables
 	bool prisonerAttacked;
 
@@ -41,12 +48,16 @@ public:
 	std::vector<float> prisonerHealth;
 
 	prisonerState PState;
+#pragma endregion
 
+#pragma region Accessors
 	//Accessors
 	const sf::Vector2f& getPos() const;
 	const sf::FloatRect getBounds() const;
+#pragma endregion
 
-	//Public functions
+#pragma region Public Functions
+	//Public Functions
 	void playerAttacked(GUI &gui, Player &player);
 	void updateStateChange(sf::Time deltaTime);
 	void prisonerState();
@@ -57,5 +68,7 @@ public:
 
 	void update(sf::Time deltaTime);
 	void render(sf::RenderTarget& target);
+#pragma endregion
 };
 
+#endif

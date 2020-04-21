@@ -1,5 +1,6 @@
 #include "guardDialogue.h"
 
+#pragma region Initialization
 // Initialization
 void guardDialogue::initVariables()
 {
@@ -87,8 +88,9 @@ void guardDialogue::initFont()
 		system("pause"); // pausing out on the console
 	}
 }
+#pragma endregion
 
-
+#pragma region Constructor / Destructor
 //Constructor / Destructor
 guardDialogue::guardDialogue()
 {
@@ -103,8 +105,9 @@ guardDialogue::~guardDialogue()
 {
 
 }
+#pragma endregion
 
-
+#pragma region public Functions
 // public Functions
 void guardDialogue::drawDialogueBox(sf::View &view, sf::RenderTarget& target) {
 	DialogueBox.setPosition(view.getCenter().x - 200, view.getCenter().y + 80);
@@ -453,3 +456,4 @@ void guardDialogue::update(sf::Time deltaTime)
 void guardDialogue::render(sf::RenderTarget &target)
 {
 }
+#pragma endregion

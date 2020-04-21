@@ -1,5 +1,6 @@
 #include "GameOver.h"
 
+#pragma region Initialization
 // Initialization 
 void GameOver::initVariables()
 {
@@ -47,7 +48,9 @@ void GameOver::initFont()
 		system("pause");
 	}
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 GameOver::GameOver()
 {
@@ -61,7 +64,9 @@ GameOver::GameOver()
 GameOver::~GameOver()
 {
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public Functions
 void GameOver::Up() {
 	if (this->selectedItemIndex - 1 >= 0) { // If the item index is above 0, so you cant just keep pressing up and break stuff
@@ -142,3 +147,4 @@ void GameOver::render(sf::RenderTarget & target, sf::View &view)
 		target.draw(ExitMenuText[i]);
 	}
 }
+#pragma endregion

@@ -1,5 +1,6 @@
 #include "Prisoner.h"
 
+#pragma region Initialization
 // Initialization
 void Prisoner::initVariables()
 {
@@ -87,7 +88,9 @@ void Prisoner::initSprite()
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 Prisoner::Prisoner()
 {
@@ -100,7 +103,9 @@ Prisoner::~Prisoner()
 {
 
 }
+#pragma endregion
 
+#pragma region Accessors
 // Accessors
 const sf::Vector2f& Prisoner::getPos() const
 {
@@ -115,7 +120,9 @@ const sf::FloatRect Prisoner::getBounds() const
 		return this->sprites[i].getGlobalBounds();
 	}
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public Functions
 void Prisoner::updateStateChange(sf::Time deltaTime) {
 
@@ -355,6 +362,4 @@ void Prisoner::render(sf::RenderTarget & target)
 		target.draw(sprites[i]);
 	}
 }
-
-
-
+#pragma endregion

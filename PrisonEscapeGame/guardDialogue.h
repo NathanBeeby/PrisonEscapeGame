@@ -1,16 +1,16 @@
 #pragma once
-
+#ifndef GUARDDIALOGUE_H
+#define GUARDDIALOGUE_H
 #include "Dialogue.h"
 
 #define guard_item_Number 3
 class guardDialogue : virtual public Dialogue
 {
 private:
-	// Variables
+#pragma region Private Variables
+	// Private Variables
 	enum guardDialogueState { guardTalk, guardMissions, snitching, guardDialogueMenu, guardNoState };
-	
 	std::vector <std::string> GM;
-
 	sf::Text GuardText[guard_item_Number];
 	sf::Text repText;
 	sf::Texture acceptTexture, declineTexture, cancelTexture;
@@ -18,23 +18,30 @@ private:
 
 	int guardItemIndex;
 	int GetPressedItem() { return guardItemIndex; }
+#pragma endregion
+
+#pragma region Initialization
 	//Initialization
 	void initVariables();
 	void initSprites();
 	void initText();
 	void initTextures();
 	void initFont();
-
+#pragma endregion
 public:
+#pragma region Constructor / Destructor
 	//Constructor / Destructor
 	guardDialogue();
 	virtual ~guardDialogue();
+#pragma endregion
 
+#pragma region Public Variables
 	// Public Variables
-
 	int prisonInfo; // int for number of information collected on prisoner
 	guardDialogueState guardDState;
+#pragma endregion
 
+#pragma region Public Functions
 	// Public Functions
 	void drawDialogueBox(sf::View &view, sf::RenderTarget& target);
 	void draw(sf::View &view, sf::RenderTarget& target);
@@ -53,8 +60,7 @@ public:
 
 	void update(sf::Time deltaTime);
 	void render(sf::RenderTarget &target);
-
-
-
+#pragma endregion
 };
 
+#endif

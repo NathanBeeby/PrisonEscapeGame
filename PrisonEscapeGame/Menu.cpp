@@ -1,5 +1,6 @@
 #include "Menu.h"
 
+#pragma region Initialization
 // Initialization
 void Menu::initVariables()
 {
@@ -65,7 +66,9 @@ void Menu::initFont()
 		system("pause");
 	}
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 Menu::Menu()
 {
@@ -80,7 +83,9 @@ Menu::~Menu()
 {
 
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public FUnctions
 void Menu::MouseHandler(sf::RenderWindow &window) {
 	sf::Vector2i mousePos = ::sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
@@ -171,3 +176,4 @@ void Menu::render(sf::RenderTarget &target) {
 		target.draw(MenuText[i]);
 	}
 }
+#pragma endregion

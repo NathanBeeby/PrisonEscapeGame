@@ -1,5 +1,6 @@
 #include "Instructions.h"
 
+#pragma region Initialization
 // Initialization
 void Instructions::initVariables()
 {
@@ -157,7 +158,9 @@ void Instructions::initFont()
 		system("pause");
 	}
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 Instructions::Instructions()
 {
@@ -171,7 +174,9 @@ Instructions::Instructions()
 Instructions::~Instructions()
 {
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public Functions
 void Instructions::keyHandler(sf::Keyboard::Key key) {
 	if (key == sf::Keyboard::Up || key == sf::Keyboard::W) {
@@ -345,3 +350,4 @@ void Instructions::render(sf::RenderTarget &target) {
 		RoutineSubMenu(target);
 	}
 }
+#pragma endregion

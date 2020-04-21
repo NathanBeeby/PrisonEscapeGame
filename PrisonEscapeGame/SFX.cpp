@@ -1,5 +1,6 @@
 #include "SFX.h"
 
+#pragma region Initialization
 // Initialization
 void SFX::initVariables()
 {
@@ -8,6 +9,7 @@ void SFX::initVariables()
 
 void SFX::initSounds()
 {
+	//Loading in sound files
 	if (!this->punchBuffer.loadFromFile("../assets/sound_assets/SFX/Punch.wav")) {
 		std::cout << "Sound effect Punch not working" << std::endl;
 	}
@@ -20,12 +22,13 @@ void SFX::initSounds()
 	if (!this->doorBuffer.loadFromFile("../assets/sound_assets/SFX/DoorOpen.wav")) {
 		std::cout << "Sound effect door open not working" << std::endl;
 	}
-	//Loading in Menu music
 	if (!this->menuSound.openFromFile("../assets/sound_assets/Music/BlueHighway.ogg")) {
 		std::cout << "Background music not loaded" << std::endl;
 	}
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 SFX::SFX()
 {
@@ -37,7 +40,9 @@ SFX::~SFX()
 {
 
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public Functions
 void SFX::punchEffect(OptionsMenu &options) {
 	std::cout << "Punched" << std::endl;
@@ -80,7 +85,9 @@ void SFX::pauseMenuMusic()
 {
 	this->menuSound.pause(); // pause that funky music
 }
+
 void SFX::setMusicVolume(OptionsMenu &options)
 {
 	this->menuSound.setVolume(options.Music);
 }
+#pragma endregion

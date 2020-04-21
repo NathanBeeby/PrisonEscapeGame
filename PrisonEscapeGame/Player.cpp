@@ -1,5 +1,6 @@
 #include "Player.h"
 
+#pragma region Initialization
 //Initialization
 void Player::initVariables()
 {
@@ -39,7 +40,9 @@ void Player::initTextures()
 	if (!this->spriteTexture.loadFromFile("../assets/image_assets/characters/sprite_images.png"))
 		std::cerr << "Error";
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 //Constructor / Destructor
 Player::Player() {
 	this->initVariables();
@@ -51,20 +54,39 @@ Player::~Player()
 {
 
 }
+#pragma endregion
 
-//Public functions
+#pragma region Accessors
+const sf::Vector2f & Player::getPos() const
+{
+	return sprite.getPosition();
+}
+
+const sf::Vector2f & Player::getSize() const
+{
+	return this->playerSize;
+}
+
+const sf::FloatRect Player::getBounds() const
+{
+	return this->sprite.getGlobalBounds();
+}
+#pragma endregion
+
+#pragma region Public Functions
+//Public Functions
 void Player::playerKeyboardMovement(sf::Keyboard::Key key, sf::Time deltaTime) {
 	vel.x = 0;
 	vel.y = 0;
 
-	if (key == sf::Keyboard::Up || key == sf::Keyboard::W)
+	if (key == sf::Keyboard::Up)
 	{
 		vel.y -= (moveSpeed + (this->stamina) * deltaTime.asSeconds());
 		CharAnim.y = Up;
 		lastPosition = Up;
 
 	}
-	else if (key == sf::Keyboard::Down || key == sf::Keyboard::S)
+	else if (key == sf::Keyboard::Down)
 	{
 		vel.y += (moveSpeed + (this->stamina)* deltaTime.asSeconds());
 		CharAnim.y = Down;
@@ -72,14 +94,14 @@ void Player::playerKeyboardMovement(sf::Keyboard::Key key, sf::Time deltaTime) {
 
 	}
 
-	if (key == sf::Keyboard::Left || key == sf::Keyboard::A)
+	if (key == sf::Keyboard::Left)
 	{
 		vel.x -= (moveSpeed + (this->stamina)* deltaTime.asSeconds());
 		CharAnim.y = Left;
 		lastPosition = Left;
 
 	}
-	if (key == sf::Keyboard::Right || key == sf::Keyboard::D)
+	if (key == sf::Keyboard::Right)
 	{
 		vel.x += (moveSpeed + (this->stamina)* deltaTime.asSeconds());
 		CharAnim.y = Right;
@@ -140,23 +162,10 @@ void Player::render(sf::RenderTarget& target)
 	target.draw(this->sprite);
 }
 
-const sf::Vector2f & Player::getPos() const
-{
-	return sprite.getPosition();
-}
-
-const sf::Vector2f & Player::getSize() const
-{
-	return this->playerSize;
-}
-
-const sf::FloatRect Player::getBounds() const
-{
-	return this->sprite.getGlobalBounds();
-}
 
 void Player::CollisionResponse()
 {
 	this->sprite.move(this->lastVelocity);
 }
 
+#pragma endregion

@@ -1,13 +1,14 @@
 #include "NPC.h"
 
+#pragma region Initialization
 // Initialization
-
 void NPC::initVariables()
 {
 	this->spriteMovement = 0;
 }
+#pragma endregion
 
-
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 NPC::NPC()
 {
@@ -18,7 +19,9 @@ NPC::NPC()
 NPC::~NPC()
 {
 }
+#pragma endregion
 
+#pragma region Public Functions
 void NPC::CollisionResponse()
 {
 	for (int i = 0; i < sprites.size(); i++) {
@@ -62,7 +65,4 @@ void NPC::moveIdle(sf::RectangleShape sprite, float speed)
 	}
 
 }
-
-// Accessors
-
-// Public function
+#pragma endregion

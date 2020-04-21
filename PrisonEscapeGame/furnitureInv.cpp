@@ -1,5 +1,6 @@
 #include "furnitureInv.h"
 
+#pragma region Initialization
 // Initialization
 void furnitureInv::initVariables()
 {
@@ -55,7 +56,9 @@ void furnitureInv::initTextures()
 		system("pause");
 	}
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 furnitureInv::furnitureInv()
 {
@@ -68,8 +71,9 @@ furnitureInv::furnitureInv()
 furnitureInv::~furnitureInv()
 {
 }
+#pragma endregion
 
-
+#pragma region Public Functions
 // Public Functions
 void furnitureInv::Grid2by2(sf::View &view, sf::RenderWindow &window, GUI &gui) {
 	std::vector<sf::RectangleShape>  TwoByTwo(4, sf::RectangleShape(gridBox));
@@ -177,3 +181,4 @@ void furnitureInv::update(sf::Time deltaTime)
 void furnitureInv::render(sf::RenderTarget &target)
 {
 }
+#pragma endregion

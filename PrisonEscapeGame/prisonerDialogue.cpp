@@ -1,5 +1,6 @@
 #include "prisonerDialogue.h"
 
+#pragma region Initialization
 // Initialization
 void prisonerDialogue::initVariables()
 {
@@ -104,7 +105,9 @@ void prisonerDialogue::initFont()
 	}
 
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 prisonerDialogue::prisonerDialogue()
 {
@@ -119,7 +122,9 @@ prisonerDialogue::~prisonerDialogue()
 {
 
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public Functions
 void prisonerDialogue::Up() {
 	if (prisonItemIndex - 1 >= 0) { // If the item index is above 0, so you cant just keep pressing up and break stuff
@@ -477,3 +482,4 @@ void prisonerDialogue::render(sf::RenderTarget &target)
 {
 
 }
+#pragma endregion

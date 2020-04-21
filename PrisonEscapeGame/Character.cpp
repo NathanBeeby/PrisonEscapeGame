@@ -1,6 +1,6 @@
 #include "Character.h"
 
-
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 Character::Character()
 {
@@ -10,7 +10,9 @@ Character::Character()
 Character::~Character()
 {
 }
+#pragma endregion
 
+#pragma region Public Functions
 int & Character::getHealth()
 {
 	return this->Health;
@@ -137,3 +139,4 @@ void Character::setLevel(int lvl)
 {
 	this->level = lvl;
 }
+#pragma endregion

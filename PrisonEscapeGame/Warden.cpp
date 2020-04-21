@@ -1,5 +1,6 @@
 #include "Warden.h"
 
+#pragma region Initialization
 // Initialization
 void Warden::initVariables()
 {
@@ -76,7 +77,9 @@ void Warden::initSprite()
 void Warden::initTextures()
 {
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 Warden::Warden()
 {
@@ -88,7 +91,9 @@ Warden::Warden()
 Warden::~Warden()
 {
 }
+#pragma endregion
 
+#pragma region Accessors
 // Accessors
 const sf::Vector2f & Warden::getPos() const
 {
@@ -103,7 +108,9 @@ const sf::FloatRect Warden::getBounds() const
 		return this->sprites[i].getGlobalBounds();
 	}
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public Functions
 void Warden::updateStateChange(sf::Time deltaTime) {
 
@@ -195,3 +202,4 @@ void Warden::render(sf::RenderTarget & target)
 		target.draw(sprites[i]);
 	}
 }
+#pragma endregion

@@ -1,5 +1,6 @@
 #pragma once
-
+#ifndef HUD_H
+#define HUD_H
 #include <SFML\Graphics.hpp>
 #include <iostream>
 #include <fstream>
@@ -13,7 +14,10 @@ private:
 
 
 public:
-	HUD();
-	virtual ~HUD();
-
+#pragma region Constructor / Destructor
+	// Constructor / Destructor
+	HUD() {}
+	virtual ~HUD() {}
+#pragma endregion
 };
+#endif

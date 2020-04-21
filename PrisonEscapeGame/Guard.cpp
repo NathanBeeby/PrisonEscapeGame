@@ -1,5 +1,6 @@
 #include "Guard.h"
 
+#pragma region Initialization
 //Initialization
 void Guard::initVariables()
 {
@@ -89,7 +90,9 @@ void Guard::initSprites()
 
 
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 Guard::Guard()
 {
@@ -102,7 +105,9 @@ Guard::~Guard()
 {
 
 }
+#pragma endregion
 
+#pragma region Accessors
 // Accessors
 const sf::Vector2f & Guard::getPos() const
 {
@@ -117,7 +122,9 @@ const sf::FloatRect Guard::getBounds() const
 		return this->sprites[i].getGlobalBounds();
 	}
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public Functions
 void Guard::playerAttacked(GUI & gui, Player & player)
 {
@@ -317,4 +324,4 @@ void Guard::render(sf::RenderTarget & target)
 		target.draw(sprites[i]);
 	}
 }
-
+#pragma endregion

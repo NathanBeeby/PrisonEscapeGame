@@ -1,5 +1,6 @@
 #include "prisonWalls.h"
 
+#pragma region Initialization
 // Initialization
 void prisonWalls::initTextures()
 {
@@ -51,7 +52,9 @@ void prisonWalls::initWalls()
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 prisonWalls::prisonWalls()
 {
@@ -64,7 +67,9 @@ prisonWalls::~prisonWalls()
 {
 
 }
+#pragma endregion
 
+#pragma region Accessors
 // Accessors
 const sf::FloatRect prisonWalls::getBounds() const
 {
@@ -72,7 +77,9 @@ const sf::FloatRect prisonWalls::getBounds() const
 		return this->Walls[i].getGlobalBounds();
 	}
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public Functions
 void prisonWalls::update(sf::Time deltaTime)
 {
@@ -85,3 +92,4 @@ void prisonWalls::render(sf::RenderTarget & target)
 		target.draw(Walls[i]);
 	}
 }
+#pragma endregion

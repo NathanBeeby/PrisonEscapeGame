@@ -1,6 +1,6 @@
 #include "OptionsMenu.h"
-#include <iostream>
 
+#pragma region Initialization
 void OptionsMenu::initVariables()
 {
 	this->Music = 50.0f;
@@ -15,7 +15,7 @@ void OptionsMenu::initVariables()
 		std::cout << "Error: loading OptionsBackground.png" << std::endl;
 	}
 	this->optionsBackground.setTexture(&this->optionsBackgroundTexture);
-
+	this->selectedItemIndex = 0;
 }
 
 void OptionsMenu::initFont()
@@ -28,11 +28,8 @@ void OptionsMenu::initFont()
 	}
 }
 
-OptionsMenu::OptionsMenu()
+void OptionsMenu::initText()
 {
-	this->initVariables();
-	this->initFont();
-
 	OptionsMenuText[0].setFont(font);
 	OptionsMenuText[0].setCharacterSize(60);
 	OptionsMenuText[0].setFillColor(sf::Color::Blue);
@@ -59,16 +56,24 @@ OptionsMenu::OptionsMenu()
 	OptionsMenuText[3].setFillColor(sf::Color::White);
 	OptionsMenuText[3].setString("Back");
 	OptionsMenuText[3].setPosition(sf::Vector2f(40, this->height - 90)); // center item for width, have the amount of string items + 1, so that they're equally spaced out
-
-
-	selectedItemIndex = 0;
 }
 
+#pragma endregion
+
+#pragma region Constructor / Destructor
+OptionsMenu::OptionsMenu()
+{
+	this->initVariables();
+	this->initFont();
+	this->initText();
+}
 
 OptionsMenu::~OptionsMenu()
 {
 }
+#pragma endregion
 
+#pragma region Public Functions
 void OptionsMenu::keyHandler(sf::Keyboard::Key key) {
 	if (key == sf::Keyboard::Up) {
 		Up();
@@ -218,3 +223,4 @@ void OptionsMenu::Down() {
 		OptionsMenuText[selectedItemIndex].setFillColor(sf::Color::Blue); //set the white colour to blue
 	}
 }
+#pragma endregion

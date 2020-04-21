@@ -1,5 +1,6 @@
 #include "Doors.h"
 
+#pragma region Initialization
 // Initialization
 void Doors::initVariables()
 {
@@ -70,7 +71,9 @@ void Doors::initDoors()
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 Doors::Doors()
 {
@@ -82,7 +85,9 @@ Doors::~Doors()
 {
 
 }
+#pragma endregion
 
+#pragma region Accessors
 // Accessors
 const sf::FloatRect Doors::getBounds() const
 {
@@ -90,9 +95,10 @@ const sf::FloatRect Doors::getBounds() const
 		return this->doors[i].getGlobalBounds();
 	}
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public Functions
-
 void Doors::update(sf::Time deltaTime)
 {
 
@@ -104,4 +110,5 @@ void Doors::render(sf::RenderTarget & target)
 		target.draw(doors[i]);
 	}
 }
+#pragma endregion
 

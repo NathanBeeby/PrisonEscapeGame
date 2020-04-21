@@ -1,5 +1,6 @@
 #include "InventoryItems.h"
 
+#pragma region Initialization
 // Initialization
 void InventoryItems::initVariables()
 {
@@ -75,7 +76,9 @@ void InventoryItems::initReadFile()
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 InventoryItems::InventoryItems()
 {
@@ -87,16 +90,18 @@ InventoryItems::~InventoryItems()
 {
 
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public Functions
 void InventoryItems::prepare2x2Items(sf::View &view) {
-	if (inv2by2Empty == true) {
-		InvRand2by2 = rand() % 4 + 1; // randomizing InvRand2by2 to get a number between 1 and 4
-		ItemRand2x2.resize(InvRand2by2);
-		for (int i = 0; i < InvRand2by2; i++) {
-			ItemRand2x2[i] = rand() % 15 + 1; // ItemRand2by2 will have a texture for each number
-		}
-		inv2by2Empty = false; //stopping the randomization
+
+	std::cout << "Storage randomizing" << std::endl;
+	InvRand2by2 = rand() % 4 + 1; // randomizing InvRand2by2 to get a number between 1 and 4
+	ItemRand2x2.resize(InvRand2by2);
+
+	for (int i = 0; i < InvRand2by2; i++) {
+		ItemRand2x2[i] = rand() % 15 + 1; // ItemRand2by2 will have a texture for each number
 	}
 
 	for (int i = 0; i < 2; i++) { //looping through for the positions
@@ -109,16 +114,17 @@ void InventoryItems::prepare2x2Items(sf::View &view) {
 			}
 		}
 	}
+
+	inv2by2Empty = false; //stopping the randomization
 }
 
 void InventoryItems::prepare4x4Items(sf::View &view) {
-	if (inv4by4Empty == true) {
-		InvRand4by4 = rand() % 16 + 1; // randomizing InvRand2by2 to get a number between 1 and 4
-		ItemRand4x4.resize(InvRand4by4);
-		for (int i = 0; i < InvRand4by4; i++) {
-			ItemRand4x4[i] = rand() % 15 + 1; // ItemRand2by2 will have a texture for each number
-		}
-		inv4by4Empty = false; //stopping the randomization
+
+	InvRand4by4 = rand() % 16 + 1; // randomizing InvRand2by2 to get a number between 1 and 4
+	ItemRand4x4.resize(InvRand4by4);
+
+	for (int i = 0; i < InvRand4by4; i++) {
+		ItemRand4x4[i] = rand() % 15 + 1; // ItemRand2by2 will have a texture for each number
 	}
 
 	for (int i = 0; i < 4; i++) {
@@ -130,17 +136,17 @@ void InventoryItems::prepare4x4Items(sf::View &view) {
 			}
 		}
 	}
+
+	inv4by4Empty = false; //stopping the randomization
 }
 
 void InventoryItems::prepare5x2Items(sf::View &view) {
-	if (inv5by2Empty == true) {
-		InvRand5by2 = rand() % 10 + 1; // randomizing InvRand2by2 to get a number between 1 and 10
-		ItemRand5x2.resize(InvRand5by2);
-		for (int i = 0; i < InvRand5by2; i++) {
-			ItemRand5x2[i] = rand() % 15 + 1; // ItemRand2by2 will have a texture for each number
-		}
-		inv5by2Empty = false; //stopping the randomization
+	InvRand5by2 = rand() % 10 + 1; // randomizing InvRand2by2 to get a number between 1 and 10
+	ItemRand5x2.resize(InvRand5by2);
+	for (int i = 0; i < InvRand5by2; i++) {
+		ItemRand5x2[i] = rand() % 15 + 1; // ItemRand2by2 will have a texture for each number
 	}
+
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 2; j++) {
@@ -151,35 +157,46 @@ void InventoryItems::prepare5x2Items(sf::View &view) {
 			}
 		}
 	}
+	inv5by2Empty = false; //stopping the randomization
 }
 
 void InventoryItems::draw2x2Items(sf::View &view, sf::RenderWindow &window, GUI &gui) {
-	prepare2x2Items(view);
+	
+	if (inv2by2Empty == true) {
+		std::cout << "Preparing items" << std::endl;
+		prepare2x2Items(view);
+	}
 
 	for (int i = 0; i < Items2by2.size(); i++) {
 		Items2by2[i].setTexture(&inventoryTexture[ItemRand2x2[i]]); // getting a random texture
 		window.draw(Items2by2[i]);
 	}
+
 	mouseHandler(window, gui);
 }
 
 void InventoryItems::draw4x4Items(sf::View &view, sf::RenderWindow &window, GUI &gui) {
-	prepare4x4Items(view);
-
+	
+	if (inv4by4Empty == true) {
+		std::cout << "Preparing items" << std::endl;
+		prepare4x4Items(view);
+	}
 
 	for (int i = 0; i < Items4by4.size(); i++) {
 		Items4by4[i].setSize(sf::Vector2f(40, 45)); // giving the item a size
 		Items4by4[i].setTexture(&inventoryTexture[ItemRand4x4[i]]); // getting a random texture
 		window.draw(Items4by4[i]);
 	}
+
 	mouseHandler(window, gui);
 }
 
 void InventoryItems::draw5x2Items(sf::View &view, sf::RenderWindow &window, GUI &gui) {
-	prepare5x2Items(view);
-
-	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window	
-	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos); // convert it to world coordinates
+	
+	if (inv5by2Empty == true) {
+		std::cout << "Preparing items" << std::endl;
+		prepare5x2Items(view);
+	}
 
 	for (int i = 0; i < Items5by2.size(); i++) {
 		Items5by2[i].setSize(sf::Vector2f(40, 45)); // giving the item a size
@@ -192,11 +209,11 @@ void InventoryItems::draw5x2Items(sf::View &view, sf::RenderWindow &window, GUI 
 
 void InventoryItems::mouseHandler(sf::RenderWindow & window, GUI & gui)
 {
-	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
-															// convert it to world coordinates
-	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window							
+	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);// convert it to world coordinates
+
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // left mouse button
-		
+
 		// 2 x 2 items
 		for (int i = 0; i < Items2by2.size(); i++) {
 			if (worldPos.x >= Items2by2[i].getPosition().x && worldPos.x <= Items2by2[i].getPosition().x + Items2by2[i].getSize().x) {
@@ -209,6 +226,10 @@ void InventoryItems::mouseHandler(sf::RenderWindow & window, GUI & gui)
 						this->inventoryTexture.erase(inventoryTexture.begin() + i);
 						this->Items2by2.erase(Items2by2.begin() + i); // erasing the selected Item from the array	
 																	  // This removes the item within the array, however swaps texture with another item in the array
+						if (i < 1) {
+							this->inv2by2Empty == true;
+							std::cout << "Empty Storage" << std::endl;
+						}
 					}
 				}
 			}
@@ -225,6 +246,11 @@ void InventoryItems::mouseHandler(sf::RenderWindow & window, GUI & gui)
 
 						this->inventoryTexture.erase(inventoryTexture.begin() + i);
 						this->Items4by4.erase(Items4by4.begin() + i); // erasing the selected Item from the array
+
+						if (i < 1) {
+							this->inv4by4Empty == true;
+							std::cout << "Empty Storage" << std::endl;
+						}
 					}
 				}
 			}
@@ -241,6 +267,11 @@ void InventoryItems::mouseHandler(sf::RenderWindow & window, GUI & gui)
 
 						this->inventoryTexture.erase(inventoryTexture.begin() + i);
 						this->Items5by2.erase(Items5by2.begin() + i); // erasing the selected Item from the array
+
+						if (i < 1) {
+							this->inv5by2Empty = true;
+							std::cout << "Empty Storage" << std::endl;
+						}
 					}
 				}
 			}
@@ -258,4 +289,4 @@ void InventoryItems::render(sf::RenderTarget &target)
 {
 
 }
-
+#pragma endregion

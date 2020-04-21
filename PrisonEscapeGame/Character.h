@@ -1,4 +1,6 @@
 #pragma once
+#ifndef CHARACTER_H
+#define CHARACTER_H
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "ParticleEmitter.h"
@@ -8,16 +10,21 @@ class Character
 private:
 
 public:
+#pragma region Constructor / Destructor
 	// Constructor / Destructor
 	Character();
 	virtual ~Character();
+#pragma endregion
 
+#pragma region Public Variables
 	// Public Variables
 	int strength, stamina, armour, charisma, knowledge, damage, level;
 	int Health, HealthMax;
 	float moveSpeed;
 	sf::RectangleShape sprite;
+#pragma endregion
 
+#pragma region Public Functions
 	// Public Functions
 	int& getHealth();
 	int& getMaxHealth();
@@ -45,9 +52,13 @@ public:
 	void removeDamage(int dmg);
 	void addLevel(int lvl);
 	void setLevel(int lvl);
+#pragma endregion
 
+#pragma region Virtual Functions
 	// Virtual Functions
 	virtual void update(sf::Time deltaTime) = 0;
 	virtual void render(sf::RenderTarget &target) = 0;
+#pragma endregion
 };
 
+#endif

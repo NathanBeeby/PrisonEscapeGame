@@ -1,11 +1,14 @@
 #pragma once
+#ifndef GUI_H
+#define GUI_H
 #include "HUD.h"
 #include "Player.h"
 
 class GUI : virtual public HUD
 {
 private:
-	//Variables
+#pragma region Private Variables
+	// Private Variables
 	sf::Clock GUIClock;
 	sf::CircleShape PlayerIcon;
 	sf::RectangleShape ArmourAddition, daynight;
@@ -13,27 +16,33 @@ private:
 	sf::Font font;
 	sf::Text SkillsText, strengthText, staminaText, armourText, charismaText, knowledgeText, playerMissions, MissionsHeader, InventoryText, CraftText, moneyText, HealthText, LevelText, LevelString, XPText, TimerText, dayText, dateText, RoutineDialogue, submitText;
 	sf::Texture playerTexture, halfHealthPlayer, lowHealthPlayer, poundTexture, Skills, Inventory, Missions, characterTexture;
-	bool mousePress;
 
 	std::string prisonerFile, moneyString, lvlString;
 	std::string StrengthString, StaminaString, ArmourString, CharismaString, KnowledgeString;
 	std::vector<sf::RectangleShape> InvSlot;
 
-
+	bool mousePress;
 	int missionList, MisOpenCount, InvOpenCount, SkilOpenCount, RepOpenCount, craftOpenCount, GUITime, GUITimeMinute, day, prisonMoney;
 
 	Player player;
+#pragma endregion 
 
+#pragma region Initialization
 	// Initialization
 	void initVariables();
 	void initTextures();
 	void initSprites();
 	void initText();
 	void initGUI();
+#pragma endregion 
 public:
+#pragma region Constructor / Destructor
+	//Constructor / Destructor
 	GUI();
 	virtual ~GUI();
+#pragma endregion 
 
+#pragma region Public Variables
 	// Public Variables
 	std::vector<sf::RectangleShape> EmptySlot;
 	std::vector<sf::Texture> EmptyTexture;
@@ -45,9 +54,9 @@ public:
 	bool yardTime, chowTime, showerTime, workTime, freeTime, bedTime, MisOpen, SkilOpen, InvOpen, RepOpen, craftOpen; // USE ENUMERATION INSTEAD OF THESE BOOLS
 	int charIncrement, prisonerRep, guardRep, minute;
 	float healthBar, XPcount, HUDopacity, maxXP, night;
+#pragma endregion 
 
-
-
+#pragma region Public Functions
 	// Public Functions
 	void drawMissions(sf::View &view, sf::RenderTarget& target);
 	void drawSkills(sf::View &view, sf::RenderTarget& target);
@@ -68,6 +77,7 @@ public:
 	void updateHUD();
 	void update(sf::Time deltaTime);
 	void render(sf::RenderTarget& target);
-
+#pragma endregion 
 };
+#endif
 

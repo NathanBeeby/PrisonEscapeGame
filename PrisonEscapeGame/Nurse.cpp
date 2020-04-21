@@ -1,5 +1,6 @@
 #include "Nurse.h"
 
+#pragma region Initialization
 // Initialization
 void Nurse::initVariables()
 {
@@ -83,7 +84,9 @@ void Nurse::initSprite()
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 Nurse::Nurse()
 {
@@ -95,7 +98,9 @@ Nurse::Nurse()
 Nurse::~Nurse()
 {
 }
+#pragma endregion
 
+#pragma region Accessors
 // Accessors
 const sf::Vector2f & Nurse::getPos() const
 {
@@ -110,7 +115,9 @@ const sf::FloatRect Nurse::getBounds() const
 		return this->sprites[i].getGlobalBounds();
 	}
 }
+#pragma endregion
 
+#pragma region Public Functions
 // Public Functions
 void Nurse::drawNurse(sf::RenderTarget& target) {
 	NurseState::nurseIDLE;
@@ -217,4 +224,4 @@ void Nurse::render(sf::RenderTarget& target)
 		target.draw(sprites[i]);
 	}
 }
-
+#pragma endregion

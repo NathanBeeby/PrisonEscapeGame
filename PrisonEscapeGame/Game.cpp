@@ -9,10 +9,10 @@ void Game::initVariables()
 
 	// State Variables
 	this->GameState = StartMenu;
-	this->invS = noState; // the inventorys state whilst running is set to have no state
-	this->skills = noMenu; // the skill items have no menu to begin with
+	this->invS = noState; 
+	this->skills = noMenu; 
 
-						   // Position of screen center
+	// Position of screen center
 	this->pos = sf::Vector2f(this->ScreenSize.x / 2, this->ScreenSize.y / 2);
 	this->sfx.playMenuMusic();
 	// Time Variables
@@ -23,9 +23,9 @@ void Game::initWindow()
 {
 	this->ScreenSize = sf::Vector2f(800, 600);
 	this->videomode = sf::VideoMode(this->ScreenSize.x, this->ScreenSize.y);
-	this->window = new sf::RenderWindow(this->videomode, "Prison Escape!", sf::Style::Close | sf::Style::Titlebar);//setting the window
+	this->window = new sf::RenderWindow(this->videomode, "Prison Escape!", sf::Style::Close | sf::Style::Titlebar); //setting the window
 	this->window->setFramerateLimit(60);
-	this->window->setVerticalSyncEnabled(true);// controlling the refresh rate in line with the vertical frequency of the monitor
+	this->window->setVerticalSyncEnabled(true); // controlling the refresh rate in line with the vertical frequency of the monitor
 }
 
 void Game::initView()
@@ -139,7 +139,6 @@ void Game::objectCollision()
 	// DOOR COLLISION
 	for (int i = 0; i < doors.doors.size(); i++) {
 		if (this->player.getBounds().intersects(doors.doors[i].getGlobalBounds())) {
-			//std::cout << "Collision made with door: " << i << std::endl;
 			player.CollisionResponse();// stops player movement
 			sfx.openDoorEffect(options);
 
@@ -154,63 +153,51 @@ void Game::objectCollision()
 		}
 
 		if (prisoner.getBounds().intersects(doors.doors[i].getGlobalBounds())) {
-			//	std::cout << "prisoner Collision made with door: " << i << std::endl;
 			prisoner.CollisionResponse(); // stops player movement
 		}
 
 		if (guard.getBounds().intersects(doors.doors[i].getGlobalBounds())) {
-			//std::cout << "guard Collision made with door: " << i << std::endl;
 			guard.CollisionResponse(); // stops player movement
 		}
 
 		if (nurse.getBounds().intersects(doors.doors[i].getGlobalBounds())) {
-			//std::cout << "nurse Collision made with door: " << i << std::endl;
 			nurse.CollisionResponse(); // stops player movement
 		}
 
 		if (warden.getBounds().intersects(doors.doors[i].getGlobalBounds())) {
-			//std::cout << "warden Collision made with door: " << i << std::endl;
 			warden.CollisionResponse(); // stops player movement
 		}
 	}
 
-	//WALL COLLISION - NOT WORKING
 	for (int i = 0; i < walls.Walls.size(); i++) {
 		if (this->player.getBounds().intersects(walls.Walls[i].getGlobalBounds())) {
-			//std::cout << "Collision made with door: " << i << std::endl;
 			player.CollisionResponse();// stops player movement
 			sfx.collisionEffect(options);
 		}
 
 		if (prisoner.getBounds().intersects(walls.Walls[i].getGlobalBounds())) {
-			//	std::cout << "prisoner Collision made with door: " << i << std::endl;
 			prisoner.CollisionResponse(); // stops player movement
 
 		}
 
 
 		if (guard.getBounds().intersects(walls.Walls[i].getGlobalBounds())) {
-			//std::cout << "guard Collision made with door: " << i << std::endl;
 			guard.CollisionResponse(); // stops player movement
 		}
 
 
 		if (nurse.getBounds().intersects(walls.Walls[i].getGlobalBounds())) {
-			//std::cout << "nurse Collision made with door: " << i << std::endl;
 			nurse.CollisionResponse(); // stops player movement
 		}
 
 		if (warden.getBounds().intersects(walls.Walls[i].getGlobalBounds())) {
-			//std::cout << "warden Collision made with door: " << i << std::endl;
 			warden.CollisionResponse(); // stops player movement
 		}
 	}
 
-
 	// Furniture Collision
 	for (int i = 0; i < furniture.furniture.size(); i++) {
 		if (this->player.getBounds().intersects(furniture.furniture[i].getGlobalBounds())) {
-			//	std::cout << "Collision made with piece of furniture: " << i << std::endl;
 			player.CollisionResponse();// stops player movement
 
 			if (i >= 18 && i <= 27) {
@@ -223,76 +210,58 @@ void Game::objectCollision()
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
 					std::cout << "Accessed Bin - code Number: " << i << std::endl;
 					invS = BinInv;
-
 				}
 			}
 			if (i >= 69 && i <= 73) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
 					std::cout << "Accessed Footlocker - code Number: " << i << std::endl;
 					invS = FtLockerInv;
-
 				}
 			}
 			if (i >= 89 && i <= 95) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
 					std::cout << "Accessed Desk - code Number: " << i << std::endl;
 					invS = DeskInv;
-
 				}
 			}
 			if (i >= 133 && i <= 134) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
 					std::cout << "Accessed ToolsCabinet - code Number: " << i << std::endl;
 					invS = TlsCbInv;
-
 				}
 			}
 			if (i >= 137 && i <= 138) {
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
 					std::cout << "Accessed Dumpster - code Number: " << i << std::endl;
 					invS = DumpsterInv;
-
 				}
 			}
-
 		}
 
 		if (prisoner.getBounds().intersects(furniture.furniture[i].getGlobalBounds())) {
-			//	std::cout << "prisoner Collision made with furniture piece: " << i << std::endl;
 			this->prisoner.CollisionResponse(); // stops player movement
 
 		}
 
-
 		if (guard.getBounds().intersects(furniture.furniture[i].getGlobalBounds())) {
-			//	std::cout << "guard Collision made with furniture piece: " << i << std::endl;
 			this->guard.CollisionResponse(); // stops player movement
 
 		}
 
-
 		if (nurse.getBounds().intersects(furniture.furniture[i].getGlobalBounds())) {
-			//	std::cout << "nurse Collision made with furniture piece: " << i << std::endl;
 			nurse.CollisionResponse(); // stops player movement
-
 		}
 
-
 		if (warden.getBounds().intersects(furniture.furniture[i].getGlobalBounds())) {
-			//	std::cout << "warden Collision made with furniture piece: " << i << std::endl;
 			warden.CollisionResponse(); // stops player movement
-
 		}
 
 	}
-
-	//Skill Item Collision
 }
 void Game::skillItemCollision()
 {
 	for (int i = 0; i < skillitems.skillItems.size(); i++) {
 		if (player.getBounds().intersects(skillitems.skillItems[i].getGlobalBounds())) {
-			//std::cout << "Collision made with SkillItem: " << i << std::endl;
 			player.CollisionResponse(); // stops player movement
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
 				if (i <= 5) {
@@ -311,28 +280,23 @@ void Game::skillItemCollision()
 		}
 
 		if (prisoner.getBounds().intersects(skillitems.skillItems[i].getGlobalBounds())) {
-			//	std::cout << "prisoner Collision made with skill item: " << i << std::endl;
 			prisoner.CollisionResponse(); // stops player movement
 
 		}
 
 		if (guard.getBounds().intersects(skillitems.skillItems[i].getGlobalBounds())) {
-			//	std::cout << "guard Collision made with skill item: " << i << std::endl;
 			guard.CollisionResponse(); // stops player movement
 
 		}
 
 		if (nurse.getBounds().intersects(skillitems.skillItems[i].getGlobalBounds())) {
-			//	std::cout << "nurse Collision made with skill item: " << i << std::endl;
 			nurse.CollisionResponse(); // stops player movement
 
 		}
 
 		if (warden.getBounds().intersects(skillitems.skillItems[i].getGlobalBounds())) {
-			//	std::cout << "warden Collision made with skill item: " << i << std::endl;
 			warden.CollisionResponse(); // stops player movement
 		}
-
 	}
 }
 void Game::updatePlayer(sf::Time deltaTime)
@@ -343,7 +307,6 @@ void Game::updatePlayer(sf::Time deltaTime)
 		// end game here
 		endGame = true;
 	}
-
 }
 void Game::updateNPCs(sf::Time deltaTime)
 {
@@ -370,7 +333,7 @@ void Game::updateGameState(sf::Keyboard::Key key) {
 
 	}
 	else if (this->GameState == PrisonGame) {
-		std::cout << "GameState: Prison Bitch" << std::endl;
+		std::cout << "GameState: Prison Game" << std::endl;
 		if (gui.healthBar <= 0) {
 			GameState = GameOverMenu;
 			std::cout << "You were beaten to death" << std::endl;
@@ -384,8 +347,7 @@ void Game::updateGameState(sf::Keyboard::Key key) {
 }
 void Game::updatePollEvents(sf::Time deltaTime)
 {
-	// use window events for keyboard input, so that the gamestates dont switch
-
+	// use window events for keyboard input
 	while (this->window->pollEvent(this->ev))
 	{
 		switch (this->ev.type) {
@@ -407,7 +369,6 @@ void Game::updatePollEvents(sf::Time deltaTime)
 		}
 	}
 }
-
 void Game::keyHandler(sf::Keyboard::Key key)
 {
 	if (key == sf::Keyboard::S) { //skills
@@ -437,16 +398,7 @@ void Game::keyHandler(sf::Keyboard::Key key)
 		invS = noState;
 		skills = noMenu;
 	}
-	//else if (key == sf::Keyboard::X) {
-	//	this->view.zoom(1);
-	//	std::cout << "X pressed" << std::endl;
-	//}
-	//else if (key == sf::Keyboard::Z) {
-	//	this->view.zoom(-1);
-	//	std::cout << "Z pressed" << std::endl;
-	//}
 }
-
 void Game::updateCollision()
 {
 	this->objectCollision();
@@ -455,22 +407,18 @@ void Game::updateCollision()
 
 	this->NPCCollision();
 }
-
 void Game::updateView()
 {
-	view.setCenter(pos);//+ (this->ScreenSize.x / 2) //+ (this->ScreenSize.y / 2)
+	view.setCenter(pos);
 	view.move(player.getPos().x - (this->ScreenSize.x / 2), player.getPos().y - (this->ScreenSize.y / 2));
 }
-
 void Game::update(sf::Time deltaTime)
 {
 	if (this->endGame == false) {
-		//std::cout << "Game hasn't ended, poll events" << std::endl;
 		this->updatePollEvents(deltaTime);
 		if (GameState == PrisonGame) {
 			this->gui.update(deltaTime);
 			this->updatePlayer(deltaTime);
-			//this->updateNPCs(deltaTime);
 			this->updateView();
 			this->updateCollision();
 		}
@@ -479,7 +427,6 @@ void Game::update(sf::Time deltaTime)
 #pragma endregion
 
 #pragma region GAME LOGIC
-
 void Game::GUIOptions() {
 	if (gui.SkilOpen == true) {
 		gui.drawSkills(view, *this->window);
@@ -497,13 +444,16 @@ void Game::GUIOptions() {
 	}
 }
 void Game::SkillIncrease(sf::Keyboard::Key key) {
-	if (skills == bookshelfMenu) { // if the bookshelf is accessed, open up the skills item hud and increase knowledge by playing minigame (not yet implemented)
+	if (skills == bookshelfMenu) { 
+		// if the bookshelf is accessed, open up the skills item hud and increase knowledge by playing minigame (not yet implemented)
 		this->skillitems.knowledgeIncrease(*this->window, view, key);
 	}
-	else if (skills == bikeMenu) { // if the bike is accessed, open up the skills item hud and increase knowledge by playing minigame (not yet implemented)
+	else if (skills == bikeMenu) { 
+		// if the bike is accessed, open up the skills item hud and increase knowledge by playing minigame (not yet implemented)
 		this->skillitems.staminaIncrease(*this->window, view, key);
 	}
-	else if (skills == weightsMenu) { // if the weights bench is accessed, open up the skills item hud and increase knowledge by playing minigame (not yet implemented)
+	else if (skills == weightsMenu) {
+		// if the weights bench is accessed, open up the skills item hud and increase knowledge by playing minigame (not yet implemented)
 		this->skillitems.strengthIncrease(*this->window, view, key);
 	}
 }
@@ -524,7 +474,6 @@ void Game::StateChange(sf::RenderTarget& target)
 {
 	// GAME STATE ---- START MENU ----
 	if (GameState == StartMenu) {
-		//std::cout << "Loading Start Menu" << std::endl;
 		this->menu.render(target);
 		this->menu.MouseHandler(*this->window);
 		this->startMenuStateChange();
@@ -532,10 +481,8 @@ void Game::StateChange(sf::RenderTarget& target)
 
 	// GAMESTATE ---- OPTIONS ----- 
 	if (GameState == Options) {
-		//std::cout << "Loading Options Menu" << std::endl;
 		//draw menu
 		this->options.render(*this->window);
-		//Selecting options in menu
 		this->optionsMenuStateChange();
 		this->options.mouseHandler(*this->window);
 		this->sfx.setMusicVolume(this->options);
@@ -543,7 +490,6 @@ void Game::StateChange(sf::RenderTarget& target)
 
 	// GAMESTATE ---- INSTRUCTIONS MENU ----
 	if (GameState == InstructionsMenu) {
-		//std::cout << "Loading Instructions Menu" << std::endl;
 		this->instructions.render(*this->window);
 		this->InstructionsMenuStateChange();
 		this->instructions.mouseHandler(*this->window);
@@ -551,13 +497,12 @@ void Game::StateChange(sf::RenderTarget& target)
 	}
 	// GAMESTATE --- SKILLS MENU ----
 	if (GameState == SkillsMenu) {
-		//std::cout << "Loading Skills Menu" << std::endl;
 		this->skillmenu.render(*this->window);
 		this->SkillsMenuStateChange();
 		this->skillmenu.mouseHandler(*this->window);
 
 	}
-	// GAMESTATE ---- PRISON BITCH ----
+	// GAMESTATE ---- PRISON GAME ----
 	if (GameState == PrisonGame)
 	{
 		this->gui.MouseInput(*this->window);
@@ -567,8 +512,7 @@ void Game::StateChange(sf::RenderTarget& target)
 		this->prisonD.mouseHandler(*this->window, this->gui);
 		
 		this->guardD.mouseHandler(*this->window, this->gui);
-		//std::cout << "Loading Game Menu" << std::endl;
-		this->drawGame();
+		this->renderGame();
 	}
 	// GAMESTATE ---- GAME OVER ----
 	if (GameState == GameOverMenu) { // draw Game Over Screen here
@@ -619,34 +563,28 @@ void Game::SkillsMenuStateChange() {
 #pragma endregion
 
 #pragma region DRAWING
-void Game::drawGame() {
-	//this->sfx.pauseMenuMusic();
-	this->map.drawMap(*this->window);
-
-	this->renderPlayer(*this->window);
-	this->renderNPCs(*this->window);
-	this->renderGUI(*this->window);
-
-	this->walls.render(*this->window);
-	this->furniture.render(*this->window);
-	this->doors.render(*this->window);
-	this->skillitems.render(*this->window);
-	this->gui.drawGUI(view, *this->window);
-
-
-	this->drawInventoryOptions();
-	this->GUIOptions();
-	this->SkillIncrease(this->ev.key.code);
-	this->dialogueCheck();
-}
-
-void Game::drawInventoryOptions() {
+void Game::renderInventoryOptions() {
 	if (this->invS == LockerInv) { furninv.drawLocker(this->view, *this->window, gui); }
 	else if (invS == BinInv) { furninv.drawBin(this->view, *this->window, gui); }
 	else if (invS == FtLockerInv) { furninv.drawFootLocker(this->view, *this->window, gui); }
 	else if (invS == DeskInv) { furninv.drawDesk(this->view, *this->window, gui); }
 	else if (invS == TlsCbInv) { furninv.drawToolsCabinet(this->view, *this->window, gui); }
 	else if (invS == DumpsterInv) { furninv.drawBigBin(this->view, *this->window, gui); }
+}
+void Game::renderGame() {
+	this->map.drawMap(*this->window);
+	this->renderPlayer(*this->window);
+	this->renderNPCs(*this->window);
+	this->renderGUI(*this->window);
+	this->walls.render(*this->window);
+	this->furniture.render(*this->window);
+	this->doors.render(*this->window);
+	this->skillitems.render(*this->window);
+	this->gui.drawGUI(view, *this->window);
+	this->renderInventoryOptions();
+	this->GUIOptions();
+	this->SkillIncrease(this->ev.key.code);
+	this->dialogueCheck();
 }
 #pragma endregion
 
@@ -665,7 +603,6 @@ void Game::renderGUI(sf::RenderTarget &target)
 {
 	this->gui.render(target);
 }
-
 void Game::render()
 {
 	//Clearing the window before drawing
@@ -679,22 +616,13 @@ void Game::render()
 
 	//Displaying the items
 	this->window->display();
-
 }
-
 void Game::run()
 {
-	// Setting the last updated time to 0
 	while (this->window->isOpen()) {
-		//deltaTime = clock.restart(); // Restart the clock whilst the window is open
-		deltaTime += clock.restart();
-
-		//while (deltaTime > TimePerFrame) {
+		deltaTime += clock.restart(); // updating deltatime
 		this->update(deltaTime); // Update via frame time
 		this->render(); // Render to the window
-						//}
-
-						//std::cout << "Render Complete" << std::endl;
 	}
 }
 #pragma endregion

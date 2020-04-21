@@ -2,6 +2,7 @@
 #include <iostream>
 #include "HUD.h"
 
+#pragma region Initialization
 void SkillMenu::initVariables()
 {
 	// Integer Variables
@@ -31,7 +32,9 @@ void SkillMenu::initFont()
 		system("pause");
 	}
 }
+#pragma endregion
 
+#pragma region Initialization
 SkillMenu::SkillMenu()
 {
 	this->initVariables();
@@ -89,10 +92,9 @@ SkillMenu::SkillMenu()
 SkillMenu::~SkillMenu()
 {
 }
+#pragma endregion
 
-
-
-
+#pragma region Public Functions
 void SkillMenu::keyHandler(sf::Keyboard::Key key) {
 	std::cout << "Player Str: " << player.getStrength() << std::endl;
 	if (key == sf::Keyboard::Up) {
@@ -213,7 +215,6 @@ void SkillMenu::gamePressed() {
 void SkillMenu::exitPressed() {
 	exitPress = true; // do stuff on exit here (destructor)
 }
-
 
 void SkillMenu::mouseHandler(sf::RenderWindow &window) {
 	sf::Vector2i mousePos = ::sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
@@ -347,7 +348,7 @@ void SkillMenu::Down() {
 		SkillMenuText[selectedItemIndex].setFillColor(sf::Color::Blue); //set the white colour to blue
 	}
 }
-
+#pragma endregion
 
 
 

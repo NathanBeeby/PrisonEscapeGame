@@ -1,4 +1,6 @@
 #pragma once
+#ifndef FURNITURE_H
+#define FURNITURE_H
 #include "Object.h"
 
 // 1 x 1 Objects - Sink and toilet, office chair, locker, shower head
@@ -9,7 +11,8 @@
 class Furniture : virtual public Object
 {
 private:
-	// Variables
+#pragma region Private Variables
+	// Private Variables
 	std::vector<sf::Texture> FurnitureTexture;
 	std::ifstream myInputFile;
 	std::string furniturefilename;
@@ -17,23 +20,35 @@ private:
 	std::string furnitureFile;
 
 	int  furnitureNumber;
-
-									  // Initialization
+#pragma endregion
+	
+#pragma region Initialization
+	// Initialization
 	void initVariables();
 	void initFurniture();
+#pragma endregion
 public:
+#pragma region Constructor / Destructor
 	// Constructor / Destructor
 	Furniture();
 	virtual ~Furniture();
+#pragma endregion
 
+#pragma region Public Variables
 	// Public Variables
 	std::vector<sf::RectangleShape>  furniture;
+#pragma endregion
 
+#pragma region Accessors
 	//Accessor
 	const sf::FloatRect getBounds() const;
+#pragma endregion
 
+#pragma region Public Functions
 	//Public functions
 	void update(sf::Time deltaTime);
 	void render(sf::RenderTarget& target);
+#pragma endregion
 };
 
+#endif

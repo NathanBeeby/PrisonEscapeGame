@@ -1,5 +1,6 @@
 #include "GUI.h"
 
+#pragma region Initialization
 // Initialization
 void GUI::initVariables()
 {
@@ -349,7 +350,9 @@ void GUI::initText()
 void GUI::initGUI()
 {
 }
+#pragma endregion
 
+#pragma region Initialization
 // Constructor / Destructor
 GUI::GUI() {
 	this->initTextures();
@@ -363,8 +366,9 @@ GUI::~GUI()
 
 
 }
+#pragma endregion
 
-
+#pragma region Public Functions
 void GUI::MouseInput(sf::RenderWindow &window) {
 	sf::Vector2i mousePos = sf::Mouse::getPosition(window); // getting the position of the mouse relative to the window
 	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
@@ -901,4 +905,5 @@ void GUI::update(sf::Time deltaTime)
 void GUI::render(sf::RenderTarget & target)
 {
 }
+#pragma endregion
 

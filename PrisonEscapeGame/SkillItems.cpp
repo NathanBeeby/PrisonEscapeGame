@@ -1,5 +1,6 @@
 #include "SkillItems.h"
 
+#pragma region Initialization
 // Initialization
 void SkillItems::initVariables()
 {
@@ -87,7 +88,9 @@ void SkillItems::initSkills()
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Constructor / Destructor
 // Constructor / Destructor
 SkillItems::SkillItems()
 {
@@ -100,7 +103,9 @@ SkillItems::SkillItems()
 SkillItems::~SkillItems()
 {
 }
+#pragma endregion 
 
+#pragma region Public Functions
 // Public Functions
 void SkillItems::update(sf::Time deltaTime)
 {
@@ -150,3 +155,4 @@ void SkillItems::staminaIncrease(sf::RenderTarget &target, sf::View &view, sf::K
 		std::cout << "Stamina + 5" << std::endl;
 	}
 }
+#pragma endregion

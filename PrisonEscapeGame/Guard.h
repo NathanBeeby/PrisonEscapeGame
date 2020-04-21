@@ -1,10 +1,13 @@
 #pragma once
+#ifndef GUARD_H
+#define GUARD_H
 #include "NPC.h"
 
 class Guard : virtual public NPC
 {
 private:
-	// Variables
+#pragma region Private Variables
+	// Private Variables
 	enum guardState { guardIDLE, guardPathFollow, guardAngry, guardDead }; // moving idly, walking to destination, and chasing the player
 
 	sf::Vector2i wayPoint;
@@ -21,25 +24,35 @@ private:
 	int guardChoice, guardRand, guardNumAngry; // the prisoner thats going to be moved
 
 	Player player;
+#pragma endregion
 
+#pragma region Initialization
 	// Initialization
 	void initVariables();
 	void initTextures();
 	void initSprites();
+#pragma endregion
 public:
+#pragma region Constructor / Destructor
 	//Constructor / Destructor
 	Guard();
 	virtual ~Guard();
+#pragma endregion
 
+#pragma region Public Variables
 	// Public Variables
 	bool Attacked;
 	std::vector<float> guardHealth;
 	guardState GState;
+#pragma endregion
 
+#pragma region Accessors
 	// Accessors
 	const sf::Vector2f& getPos() const;
 	const sf::FloatRect getBounds() const;
+#pragma endregion
 
+#pragma region Public Functions
 	// Public Functions
 	void playerAttacked(GUI &gui, Player &player);
 	void updateStateChange(sf::Time deltaTime);
@@ -51,5 +64,7 @@ public:
 
 	void update(sf::Time deltaTime);
 	void render(sf::RenderTarget& target);
+#pragma endregion
 };
 
+#endif

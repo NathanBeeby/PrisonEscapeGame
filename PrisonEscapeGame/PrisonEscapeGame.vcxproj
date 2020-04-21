@@ -160,7 +160,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
-    <ClCompile Include="Dialogue.cpp" />
     <ClCompile Include="Doors.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameOver.cpp" />
@@ -169,7 +168,6 @@
     <ClCompile Include="furnitureInv.cpp" />
     <ClCompile Include="Guard.cpp" />
     <ClCompile Include="GUI.cpp" />
-    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Instructions.cpp" />
     <ClCompile Include="InventoryItems.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -177,7 +175,6 @@
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Nurse.cpp" />
-    <ClCompile Include="Object.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prisoner.cpp" />
